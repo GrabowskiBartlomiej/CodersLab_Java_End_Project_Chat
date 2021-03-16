@@ -16,6 +16,11 @@ public class User {
     @ManyToMany
     private List<Room> rooms;
 
+    public User(String email, String username, String password) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -51,5 +56,16 @@ public class User {
 
     public List<Room> getRooms() {
         return rooms;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", rooms=" + rooms +
+                '}';
     }
 }
