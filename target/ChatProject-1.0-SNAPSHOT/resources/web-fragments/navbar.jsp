@@ -1,3 +1,5 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <nav class="navbar">
     <a href="/"><img class="logo" src="resources/images/logo.png"></a>
 
