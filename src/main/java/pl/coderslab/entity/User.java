@@ -10,11 +10,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true)
     private String email;
     private String username;
     private String password;
     @ManyToMany
     private List<Room> rooms;
+
+    public User(){
+
+    }
+
 
     public User(String email, String username, String password) {
         this.email = email;

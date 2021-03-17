@@ -8,7 +8,16 @@
     <body>
         <div class="wrapper">
 
-            <%@include file="/resources/web-fragments/navbar.jsp"%>
+            <nav class="navbar">
+                <a href="/"><img class="logo" src="resources/images/logo.png"></a>
+
+                <ul>
+                    <li><a href="/">Home</a> </li>
+                    <li><a href="#">About</a> </li>
+                    <li><a href="#">Support</a></li>
+                    <li id="login"><a href ="/login">Login</a></li>
+                </ul>
+            </nav>
 
             <div class="center">
                 <h1>Welcome To Wolfpack</h1>

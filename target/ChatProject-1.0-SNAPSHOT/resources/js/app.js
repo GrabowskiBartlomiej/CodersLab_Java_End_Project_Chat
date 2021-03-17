@@ -26,3 +26,18 @@ $(".re_password").focus(function(){
 }).blur(function(){
     $(".re_password-help").slideUp(500);
 });
+
+
+function myFunction() {
+    var pass1 = document.getElementById("password").value;
+    var pass2 = document.getElementById("re_password").value;
+
+    if (pass1 != pass2) {
+        document.getElementById("password").style.background = "#E34234";
+        document.getElementById("re_password").style.background = "#E34234";
+        alert("Passwords Do not match");
+    }
+    else {
+        document.getElementById("form").submit();
+    }
+}

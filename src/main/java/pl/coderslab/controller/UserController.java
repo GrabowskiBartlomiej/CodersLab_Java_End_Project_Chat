@@ -1,5 +1,6 @@
 package pl.coderslab.controller;
 
+import com.mysql.cj.PreparedQuery;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,6 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import pl.coderslab.dao.UserDao;
 import pl.coderslab.entity.User;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -35,8 +39,13 @@ public class UserController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView logged(){
-        return new ModelAndView("homeloged");
+    public String logged(@RequestParam String email,@RequestParam String password, HttpServletRequest req){
+        if(userDao.login(email,password) == null){
+            return "login";
+        }else{
+            req.getSession().setAttribute("user",userDao.login(email,password));
+            return "homeloged";
+        }
     }
 
 
@@ -48,12 +57,26 @@ public class UserController {
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerPost(@RequestParam String username,@RequestParam String email,@RequestParam String password,@RequestParam String re_password){
-        User user = new User(email,username,password);
-        userDao.addAuthor(user);
-        return "home";
+    public String registerPost(@RequestParam String username, @RequestParam String email, @RequestParam String password, @RequestParam String re_password, HttpServletRequest req) {
+
+        if (re_password.equals(password)) {
+            password = userDao.hashPassword(password);
+            System.out.println(password);
+            User user = new User(email, username, password);
+            userDao.addAuthor(user);
+            req.getSession().setAttribute("username",username);
+            return "successRegister";
+        } else {
+            return "register";
+        }
     }
 
+
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().removeAttribute("user");
+        return ("home");
+    }
 
 
 

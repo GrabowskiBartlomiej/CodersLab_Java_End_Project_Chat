@@ -184,3 +184,15 @@ input[type="submit"]:hover{
     opacity:1;
     cursor:pointer;
 }
+
+.container{
+    height: 850px;
+    width: 350px;
+    font-size: 38px;
+    font-weight: bold;
+    color: palegreen;
+    background: rgba(0,0,0,0.9);
+    border: 1px solid black;
+    outline: none;
+    border-radius: 10px;
+}
