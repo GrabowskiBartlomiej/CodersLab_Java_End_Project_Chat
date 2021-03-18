@@ -14,19 +14,9 @@ public class User {
     private String email;
     private String username;
     private String password;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Room> rooms;
 
-    public User(){
-
-    }
-
-
-    public User(String email, String username, String password) {
-        this.email = email;
-        this.username = username;
-        this.password = password;
-    }
 
     public void setEmail(String email) {
         this.email = email;

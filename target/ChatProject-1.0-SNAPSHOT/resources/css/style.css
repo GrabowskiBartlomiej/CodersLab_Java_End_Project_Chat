@@ -171,9 +171,9 @@ input[type="text"],input[type="email"],input[type="password"]{
 }
 
 input:focus{
-    box-shadow:inset 4px 6px 10px -4px rgba(0,0,0,0.7), 0 1px 1px -1px rgba(255,255,255,0.3);
     background:rgba(0,0,0,0.3);
 @include easeme;
+    outline: none;
 }
 
 input[type="submit"]{
@@ -252,3 +252,135 @@ input[type="submit"]:hover{
     padding-left: 66px;
 }
 
+
+/*////////////////////////////////////////////////////////////////             chat            ////////////////////////////////////////////////////////////////*/
+.chat_container{
+    width: 100vw;
+    height: 100vh;
+    background: #000018;
+
+    font-size: 20px;
+    display: grid;
+
+    grid-template-columns: 100px 250px 1fr 320px; /*px absolutne wartosci, fr frakcja czyli sie resizeuje jak sie rusza oknem;*/
+    grid-template-rows: 70px 1fr 90px;
+}
+
+.chat_container div{
+    border:1px solid palegreen;
+}
+
+.chat_room{
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    color: palegreen;
+    font-family: 'Roboto';
+    padding-left: 5px;
+    padding-top: 21px;
+    background: rgba(10,10,10,0.3);
+}
+
+.chat_channel{
+    grid-column-start: 3;
+    grid-column-end: 5;
+
+    padding: 15px;
+    color: cornsilk;
+    font-size: 30px;
+    font-family: 'Roboto';
+}
+
+.chat_user{
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.chat_message_box{
+    grid-row-start: 2;
+    grid-row-end: 4;
+
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+.chat_users_list{
+    grid-row-start: 2;
+    grid-row-end: 4;
+
+    grid-column-start: 4;
+    grid-column-end: 5;
+}
+
+.chat_room_list{
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+.chat_channels_list{
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.chat_type_box{
+    grid-column-start: 3;
+    grid-column-end: 4;
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#message{
+    background: rgba(40,40,40,0.8);
+    width: 98%;
+    height: 68px;
+    position: relative;
+    top: 9px;
+    left: 14px;
+    border-radius: 20px;
+    border: rgba(40,40,40,0.8);
+    padding-top: 20px;
+    outline: none;
+}
+
+.chat_logo{
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    width: 100%;
+    height: 100%;
+}
+
+.data{
+    color: palegreen;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+
+
+
+td{
+    padding: 15px;
+}
+
+.data:hover{
+    background: palegreen;
+    color: #000018;
+}
+
+table{
+    width: 100%;
+}

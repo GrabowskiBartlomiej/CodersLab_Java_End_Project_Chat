@@ -12,8 +12,36 @@ public class Room {
     private long id;
     private String name;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Channel> channels;
 
 
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Channel> getChannels() {
+        return channels;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", channels=" + channels +
+                '}';
+    }
+
+    public void setChannels(List<Channel> channels) {
+        this.channels = channels;
+    }
 }

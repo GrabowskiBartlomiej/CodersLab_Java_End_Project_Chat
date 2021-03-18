@@ -26,12 +26,16 @@
           <element id="library" level="project" name="Maven: javax.activation:javax.activation-api:1.2.0" />
           <element id="library" level="project" name="Maven: org.dom4j:dom4j:2.1.1" />
           <element id="library" level="project" name="Maven: org.hibernate.common:hibernate-commons-annotations:5.1.0.Final" />
-          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.3.1" />
           <element id="library" level="project" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.1" />
           <element id="library" level="project" name="Maven: org.glassfish.jaxb:txw2:2.3.1" />
           <element id="library" level="project" name="Maven: com.sun.istack:istack-commons-runtime:3.0.7" />
           <element id="library" level="project" name="Maven: org.jvnet.staxex:stax-ex:1.8" />
           <element id="library" level="project" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.15" />
+          <element id="library" level="project" name="Maven: org.hibernate:hibernate-entitymanager:5.2.3.Final" />
+          <element id="library" level="project" name="Maven: dom4j:dom4j:1.6.1" />
+          <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" />
+          <element id="library" level="project" name="Maven: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" />
+          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.3.0" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:5.1.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.1.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:5.1.9.RELEASE" />

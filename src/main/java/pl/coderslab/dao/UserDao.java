@@ -1,6 +1,7 @@
 package pl.coderslab.dao;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import pl.coderslab.entity.User;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 @Repository
 @Transactional
 public class UserDao {
@@ -20,7 +22,7 @@ public class UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void addAuthor(User user) {
+    public void addUser(User user) {
         entityManager.persist(user);
     }
 
