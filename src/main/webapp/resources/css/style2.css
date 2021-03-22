@@ -313,6 +313,8 @@ input[type="submit"]:hover{
 
     grid-column-start: 4;
     grid-column-end: 5;
+
+    padding-top: 50px;
 }
 
 .chat_room_list{
@@ -383,4 +385,16 @@ td{
 
 table{
     width: 100%;
+}
+
+#online{
+    color: cornsilk;
+    width: 21%;
+    margin: auto;
+}
+
+#offline{
+    color: orangered;
+    width: 28%;
+    margin: auto;
 }

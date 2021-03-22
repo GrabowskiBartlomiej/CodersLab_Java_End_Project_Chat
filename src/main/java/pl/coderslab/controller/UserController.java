@@ -62,10 +62,19 @@ public class UserController {
 
             User user = userDao.login(email,password);
 
+            user.setStatus(3);
+            userDao.update(user);
 
+            //users online
+            List<User> usersOnline = userDao.findAllUsersOnline();
 
+            //users offline
+            List<User> usersOffline = userDao.findAllUsersOffline();
+
+            req.getSession().setAttribute("usersOnline", usersOnline);
+            req.getSession().setAttribute("usersOffline", usersOffline);
             req.getSession().setAttribute("user",user);
-            req.getSession().setAttribute("rooms",roomDao.findAll());
+            req.getSession().setAttribute("rooms", user.getRooms());
 
 
 
@@ -98,6 +107,7 @@ public class UserController {
             List<Room> rooms = new ArrayList<>();
             rooms.add(roomDao.findById(1));
             user.setRoomsAccess(rooms);
+            user.setStatus(0);
             userDao.addUser(user);
             req.getSession().setAttribute("username",username);
             return "successRegister";
@@ -109,6 +119,9 @@ public class UserController {
 
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        user.setStatus(0);
+        userDao.update(user);
         request.getSession().removeAttribute("user");
         return ("home");
     }

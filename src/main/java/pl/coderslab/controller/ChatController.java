@@ -9,6 +9,7 @@ import pl.coderslab.dao.RoomDao;
 import pl.coderslab.dao.UserDao;
 import pl.coderslab.entity.Channel;
 import pl.coderslab.entity.Room;
+import pl.coderslab.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -26,7 +27,7 @@ public class ChatController {
     }
 
     @RequestMapping("/chat/{id}")
-    public String chat(HttpServletRequest req, @PathVariable String id){
+    public String chat(HttpServletRequest req, @PathVariable String id) {
 
         long roomId = Long.parseLong(id);
         Room currentRoom = roomDao.findById(roomId);
@@ -34,16 +35,22 @@ public class ChatController {
         List<Channel> channels = currentRoom.getChannels();
 
         req.getSession().setAttribute("channels", channels);
-        req.getSession().setAttribute("roomName",currentRoom.getName());
+        req.getSession().setAttribute("roomName", currentRoom.getName());
         req.getSession().setAttribute("roomId", roomId);
-
+        req.getSession().setAttribute("usersList", userDao.findAllUsersOnTheServer(roomId));
         req.getSession().removeAttribute("channelName");
+
+
+        List<User> usersOnline = userDao.findAllUsersOnline();
+        List<User> usersOffline = userDao.findAllUsersOffline();
+        req.getSession().setAttribute("usersOnline", usersOnline);
+        req.getSession().setAttribute("usersOffline", usersOffline);
 
         return "chat";
     }
 
     @RequestMapping("/chat/{roomId}/{channelId}")
-    public String channel(HttpServletRequest req, @PathVariable String roomId, @PathVariable String channelId){
+    public String channel(HttpServletRequest req, @PathVariable String roomId, @PathVariable String channelId) {
 
         long id1 = Long.parseLong(roomId);
         long id2 = Long.parseLong(channelId);
@@ -51,9 +58,10 @@ public class ChatController {
 
         List<Channel> channels = currentRoom.getChannels();
         req.getSession().setAttribute("channels", channels);
-        req.getSession().setAttribute("roomName",currentRoom.getName());
+        req.getSession().setAttribute("roomName", currentRoom.getName());
         req.getSession().setAttribute("roomId", roomId);
-        req.getSession().setAttribute("channelName",channelDao.findById(id2).getName());
+        req.getSession().setAttribute("channelName", channelDao.findById(id2).getName());
+
 
 
         return "chat";

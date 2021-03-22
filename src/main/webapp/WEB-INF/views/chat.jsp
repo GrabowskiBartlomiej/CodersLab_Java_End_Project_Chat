@@ -10,7 +10,12 @@
     <body>
         <div class="chat_container">
 
-            <div><img href="/" class="chat_logo" src="/resources/images/logo.png"/></div>
+
+            <div class="chat_logo">
+                <a href="/">
+                    <img style="width: 100%" src="/resources/images/logo.png">
+                </a>
+            </div>
 
             <div class="chat_room">${roomName}</div>
 
@@ -26,7 +31,24 @@
                 </table>
             </div>
 
-            <div class="chat_users_list">users list</div>
+            <div class="chat_users_list">
+                <table>
+                    <p id="online">Online</p>
+                    <tbody>
+                    <c:forEach items="${usersOnline}" var="users">
+                        <tr><td><a href="#">${users.getUsername()}</a></td></tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+                <p id="offline">--Offline--</p>
+                <table>
+                    <tbody>
+                    <c:forEach items="${usersOffline}" var="users">
+                        <tr><td><a href="#">${users.getUsername()}</a></td></tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
 
             <div class="chat_user">
                 ${user.getUsername()}

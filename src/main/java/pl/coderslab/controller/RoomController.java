@@ -23,15 +23,5 @@ public class RoomController {
         this.channelDao = channelDao;
     }
 
-    @RequestMapping("/addRoom")
-    public String addRoom(){
-        Room room = new Room();
-        room.setName("Random serw");
-        List<Channel> channels = new ArrayList<>();
-        channels.add(channelDao.findById(3));
-        channels.add(channelDao.findById(4));
-        room.setChannels(channels);
-        roomDao.addRoom(room);
-        return "/";
-    }
+
 }

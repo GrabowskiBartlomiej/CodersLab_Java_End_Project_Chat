@@ -67,4 +67,21 @@ public class UserDao {
         }
         return null;
     }
+
+
+    public List<User> findAllUsersOnTheServer(long id){
+        Query query = entityManager.createQuery("select u from User u join u.rooms r where r.id =: id");
+        query.setParameter("id",id);
+        return query.getResultList();
+    }
+
+    public List<User> findAllUsersOnline(){
+        Query query = entityManager.createQuery("select u from User u where not u.status = 0");
+        return query.getResultList();
+    }
+
+    public List<User> findAllUsersOffline(){
+        Query query = entityManager.createQuery("select u from  User u where u.status = 0");
+        return query.getResultList();
+    }
 }

@@ -384,3 +384,11 @@ td{
 table{
     width: 100%;
 }
+
+#online{
+    color: cornsilk;
+}
+
+#offline{
+    color: orangered;
+}

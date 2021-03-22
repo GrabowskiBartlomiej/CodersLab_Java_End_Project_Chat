@@ -16,7 +16,8 @@ public class User {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Room> rooms;
-
+    @Column(columnDefinition="COLUMN_TYPE default '0'")
+    private long status;
 
     public void setEmail(String email) {
         this.email = email;
@@ -54,6 +55,14 @@ public class User {
         return rooms;
     }
 
+    public long getStatus() {
+        return status;
+    }
+
+    public void setStatus(long status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -62,6 +71,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", rooms=" + rooms +
+                ", status=" + status +
                 '}';
     }
 }
