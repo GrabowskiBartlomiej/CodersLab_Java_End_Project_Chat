@@ -18,6 +18,15 @@ public class User {
     private List<Room> rooms;
     @Column(columnDefinition="COLUMN_TYPE default '0'")
     private long status;
+    private String avatar = "https://www.hubitools.com/assets/36cb0984-e7f7-4b98-97e7-abbbd6fa3fc0/260x200/new.png";
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -31,7 +40,7 @@ public class User {
         this.password = password;
     }
 
-    public void setRoomsAccess(List<Room> rooms) {
+    public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
     }
 
@@ -72,6 +81,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", rooms=" + rooms +
                 ", status=" + status +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }

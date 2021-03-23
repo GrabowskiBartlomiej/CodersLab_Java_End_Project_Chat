@@ -10,6 +10,7 @@ import pl.coderslab.dao.UserDao;
 import pl.coderslab.entity.Channel;
 import pl.coderslab.entity.Room;
 import pl.coderslab.entity.User;
+import pl.coderslab.entity.UsersStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -41,10 +42,9 @@ public class ChatController {
         req.getSession().removeAttribute("channelName");
 
 
-        List<User> usersOnline = userDao.findAllUsersOnline();
-        List<User> usersOffline = userDao.findAllUsersOffline();
-        req.getSession().setAttribute("usersOnline", usersOnline);
-        req.getSession().setAttribute("usersOffline", usersOffline);
+        UsersStatus us = userDao.getUsersStatus(userDao.findAllUsersOnTheServer(roomId));
+        req.getSession().setAttribute("usersOnline", us.getOnline());
+        req.getSession().setAttribute("usersOffline", us.getOffline());
 
         return "chat";
     }
@@ -62,7 +62,9 @@ public class ChatController {
         req.getSession().setAttribute("roomId", roomId);
         req.getSession().setAttribute("channelName", channelDao.findById(id2).getName());
 
-
+        UsersStatus us = userDao.getUsersStatus(userDao.findAllUsersOnTheServer(id1));
+        req.getSession().setAttribute("usersOnline", us.getOnline());
+        req.getSession().setAttribute("usersOffline", us.getOffline());
 
         return "chat";
     }

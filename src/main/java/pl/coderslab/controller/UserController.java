@@ -12,6 +12,7 @@ import pl.coderslab.dao.RoomDao;
 import pl.coderslab.dao.UserDao;
 import pl.coderslab.entity.Room;
 import pl.coderslab.entity.User;
+import pl.coderslab.entity.UsersStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -35,7 +36,6 @@ public class UserController {
     @ResponseBody
     public ModelAndView HomePage() {
         ModelAndView mav = new ModelAndView("home");//if logged return homeloged.jsp else homepage
-       // ModelAndView mav = new ModelAndView("chat");
         return mav;
     }
 
@@ -65,14 +65,11 @@ public class UserController {
             user.setStatus(3);
             userDao.update(user);
 
-            //users online
-            List<User> usersOnline = userDao.findAllUsersOnline();
+            UsersStatus us = userDao.getUsersStatus(userDao.findAllUsersOnTheServer(1));
 
-            //users offline
-            List<User> usersOffline = userDao.findAllUsersOffline();
+            req.getSession().setAttribute("usersOnline", us.getOnline());
+            req.getSession().setAttribute("usersOffline", us.getOffline());
 
-            req.getSession().setAttribute("usersOnline", usersOnline);
-            req.getSession().setAttribute("usersOffline", usersOffline);
             req.getSession().setAttribute("user",user);
             req.getSession().setAttribute("rooms", user.getRooms());
 
@@ -106,7 +103,7 @@ public class UserController {
             user.setUsername(username);
             List<Room> rooms = new ArrayList<>();
             rooms.add(roomDao.findById(1));
-            user.setRoomsAccess(rooms);
+            user.setRooms(rooms);
             user.setStatus(0);
             userDao.addUser(user);
             req.getSession().setAttribute("username",username);

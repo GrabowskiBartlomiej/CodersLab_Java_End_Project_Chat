@@ -4,11 +4,13 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import pl.coderslab.entity.User;
+import pl.coderslab.entity.UsersStatus;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,13 +77,21 @@ public class UserDao {
         return query.getResultList();
     }
 
-    public List<User> findAllUsersOnline(){
-        Query query = entityManager.createQuery("select u from User u where not u.status = 0");
-        return query.getResultList();
+    public UsersStatus getUsersStatus(List<User> usersOnTheServer){
+        List<User> usersOnline = new ArrayList<>();
+        List<User> usersOffline = new ArrayList<>();
+        for(User user : usersOnTheServer){
+            if (user.getStatus() == 0) {
+                usersOffline.add(user);
+            }else {
+                usersOnline.add(user);
+            }
+        }
+        UsersStatus us = new UsersStatus();
+        us.setOnline(usersOnline);
+        us.setOffline(usersOffline);
+        return us;
     }
 
-    public List<User> findAllUsersOffline(){
-        Query query = entityManager.createQuery("select u from  User u where u.status = 0");
-        return query.getResultList();
-    }
+
 }
