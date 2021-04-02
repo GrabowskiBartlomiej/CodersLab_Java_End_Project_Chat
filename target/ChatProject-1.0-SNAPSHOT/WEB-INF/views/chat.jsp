@@ -75,7 +75,15 @@
                 ${user.getUsername()}
             </div>
 
-            <div class="chat_message_box">Welcome back ${user.getUsername()}!</div>
+            <div class="chat_message_box">
+                <table>
+                    <tbody>
+                        <c:forEach items="${messages}" var="message">
+                            <tr><td style="color: wheat">${message.content}</td></tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>
 
             <div class="chat_channels_list">
                 <table>
@@ -92,8 +100,8 @@
 
 
             <div class="chat_type_box">
-                <form>
-                    <input type="text" id="message" placeholder="Write on this channel...">
+                <form action="/type?roomId=${roomId}&channelId=${channelId}&userId=${user.getId()}" method="post">
+                    <input type="text" id="message" placeholder="Write on this channel..." name="message">
                     <button type="submit" style="display: none"/>
                 </form>
             </div>
