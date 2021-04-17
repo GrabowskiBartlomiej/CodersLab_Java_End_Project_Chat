@@ -3,27 +3,25 @@ package pl.coderslab.controller;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.coderslab.dao.ChannelDao;
 import pl.coderslab.dao.MessageDao;
-import pl.coderslab.dao.RoomDao;
 import pl.coderslab.dao.UserDao;
 import pl.coderslab.entity.Channel;
 import pl.coderslab.entity.Message;
 import pl.coderslab.entity.User;
-
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
 @Controller
-
 public class ChannelController {
 
     private final ChannelDao channelDao;
     private final MessageDao messageDao;
     private final UserDao userDao;
+
 
     public ChannelController(ChannelDao channelDao, MessageDao messageDao, UserDao userDao) {
         this.channelDao = channelDao;
@@ -49,7 +47,7 @@ public class ChannelController {
 
 
     @PostMapping("/type")
-    public String addMessage(@RequestParam long roomId, @RequestParam long userId, @RequestParam long channelId, @RequestParam String message) {
+    public String addMessage(@RequestParam long roomId, @RequestParam long userId, @RequestParam long channelId, @RequestParam String message, HttpSession session) {
         Message message1 = new Message();
         User user = userDao.findById(userId);
         Channel channel = channelDao.findById(channelId);
@@ -60,7 +58,9 @@ public class ChannelController {
         message1.setPostTime(time);
 
         messageDao.addMessage(message1);
+
         return "redirect:/chat/" + roomId + "/" + channelId;
     }
+
 
 }

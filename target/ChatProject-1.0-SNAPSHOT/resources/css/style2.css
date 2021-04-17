@@ -398,3 +398,10 @@ table{
     width: 28%;
     margin: auto;
 }
+
+#send{
+    width: 30px;
+    height: 60px;
+    padding-left: 50px;
+    margin-left: 20px;
+}

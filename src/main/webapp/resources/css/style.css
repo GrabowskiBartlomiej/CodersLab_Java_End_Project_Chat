@@ -1,0 +1,407 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
+
+
+/*/////////////////////////////////////////////////////////////////      HOME PAGE        ////////////////////////////////////////////////////////////////////////////*/
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper{
+    background: url(../images/Iset-wolf) no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.navbar{
+    height: 140px;
+    width: 100%;
+    background: rgba(0,0,0,0.9);
+}
+
+.logo{
+    width: 180px;
+    height: 140px;
+}
+
+.navbar ul{
+    float: right;
+    margin-right: 20px;
+}
+
+.navbar ul li{
+    list-style: none;
+    margin: 0 40px;
+    display: inline-block;
+    line-height: 120px;
+
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    color: palegreen;
+    font-size: 20px;
+    padding: 15px 15px;
+    font-family: 'Roboto', sans-serif;
+    transition: .4s;
+}
+
+.navbar ul li a.active,
+.navbar ul li a:hover{
+    background: palegreen;
+    color: navy;
+    border-radius: 2px;
+}
+
+.wrapper .center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-family: sans-serif;
+    user-select: none;
+}
+
+.center h1{
+    color: cornsilk;
+    text-shadow: 0 0 10px #000;
+    font-size: 70px;
+    font-weight: bold;
+    width: 885px;
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 50%;
+}
+
+.center .buttons{
+    margin: 35px 100px;
+}
+
+.buttons button{
+    height: 150px;
+    width: 250px;
+    font-size: 38px;
+    font-weight: bold;
+    color: palegreen;
+    background: rgba(0,0,0,0.9);
+    border: 1px solid black;
+    outline: none;
+    border-radius: 75px;
+}
+
+.buttons h4{
+    font-size: 10px;
+}
+
+.buttons .btn{
+    margin-left: 100px;
+    cursor: pointer;
+}
+
+.buttons .btn:active,
+.buttons .btn:hover{
+    background: rgba(152, 251, 152,0.6);
+    color: navy;
+    border-radius: 75px;
+}
+
+#login a{
+    background: palegreen;
+    color: navy;
+    border-radius: 2px;
+}
+
+#login a:active,
+#login a:hover{
+    background: orangered;
+    color: cornsilk;
+    border-radius: 2px;
+}
+
+
+/*///////////////////////////////////////////////////////////////////////////    REGISTER   ///////////////////////////////////////////////////////////////////////*/
+
+#title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 60px;
+    text-align:center;
+    padding:30px 0px 0px 0px;
+    color: cornsilk;
+    text-transform:uppercase;
+    text-shadow:#000 0px 1px 5px;
+    height: 20%;
+    margin-top: 50px;
+    margin-bottom: 0%;
+}
+
+#description{
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    color: palegreen;
+    text-shadow:#000 0px 1px 5px;
+    width: 80%;
+    margin: auto;
+}
+
+.form{
+    padding-top: 100px;
+    width: 80%;
+    margin: auto;
+}
+
+input[type="text"],input[type="email"],input[type="password"]{
+    width:98%;
+    padding:15px 0px 15px 8px;
+    border-radius:5px;
+    box-shadow:inset 4px 6px 10px -4px rgba(0,0,0,0.7), 0 1px 1px -1px rgba(255,255,255,0.7);
+    background:rgba(0,0,0,0.8);
+@include disable;
+    border:1px solid rgba(255,255,255,1);
+    margin-bottom:10px;
+    color:palegreen;
+    text-shadow:#000 0px 1px 5px;
+}
+
+.username-help,.email-help,.password-help,.re_password-help{
+    display:none;
+    padding:0px;
+    margin:0px 0px 15px 0px;
+    color: cornsilk;
+    font-size: 14px;
+}
+
+input:focus{
+    background:rgba(0,0,0,0.3);
+@include easeme;
+    outline: none;
+}
+
+input[type="submit"]{
+    width:98%;
+    padding:12px;
+    border-radius:14px;
+@include disable;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(gray), to(navy));
+    background-image: -webkit-linear-gradient(gray 0%,navy 100%);
+    background-image: -moz-linear-gradient(gray 0%, navy 100%);
+    background-image: -o-linear-gradient(gray 0%, navy 100%);
+    background-image: linear-gradient(gray 0%, navy 100%);
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    color:cornsilk;
+    text-transform:uppercase;
+    text-shadow:#000 0px 1px 5px;
+    border:1px solid #000;
+    opacity:0.7;
+    -webkit-box-shadow: 0 8px 6px -6px rgba(0,0,0,0.7);
+    -moz-box-shadow: 0 8px 6px -6px rgba(0,0,0,0.7);
+    box-shadow: 0 8px 6px -6px rgba(0,0,0,0.7);
+    border-top:1px solid rgba(255,255,255,0.8)!important;
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.2)));
+}
+
+input[type="submit"]:hover{
+    opacity:1;
+    cursor:pointer;
+}
+
+/* //////////////////////////////////////////////      Successful Registration    ///////////////////////////////////////////////////////////////////////////////////////*/
+
+.container{
+    height: 850px;
+    width: 850px;
+    font-size: 38px;
+    font-weight: bold;
+    color: palegreen;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid black;
+    outline: none;
+    border-radius: 10px;
+}
+
+#message{
+    font-size: 18px;
+    padding-top: 50px;
+    margin:auto;
+    width: 80%;
+    text-indent: 50px;
+}
+
+.wolf{
+    width: 30%;
+    height: 20%;
+    display: inline-block;
+    position: relative;
+    background: transparent;
+    border-radius: 20px;
+    opacity: 0.6;
+    margin-left: 35%;
+    margin-top: 5%;
+}
+
+.wolf:hover{
+    opacity:1;
+}
+
+#go_to{
+    font-size: 18px;
+    padding-top: 20%;
+    margin: auto;
+    width: 50%;
+    color: orangered;
+    padding-left: 66px;
+}
+
+
+/*////////////////////////////////////////////////////////////////             chat            ////////////////////////////////////////////////////////////////*/
+.chat_container{
+    width: 100vw;
+    height: 100vh;
+    background: #000018;
+
+    font-size: 20px;
+    display: grid;
+
+    grid-template-columns: 100px 250px 1fr 320px; /*px absolutne wartosci, fr frakcja czyli sie resizeuje jak sie rusza oknem;*/
+    grid-template-rows: 70px 1fr 90px;
+}
+
+.chat_container div{
+    border:1px solid palegreen;
+}
+
+.chat_room{
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    color: palegreen;
+    font-family: 'Roboto';
+    padding-left: 5px;
+    padding-top: 21px;
+    background: rgba(10,10,10,0.3);
+}
+
+.chat_channel{
+    grid-column-start: 3;
+    grid-column-end: 5;
+
+    padding: 15px;
+    color: cornsilk;
+    font-size: 30px;
+    font-family: 'Roboto';
+}
+
+.chat_user{
+    grid-row-start: 3;
+    grid-row-end: 4;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.chat_message_box{
+    grid-row-start: 2;
+    grid-row-end: 4;
+
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+.chat_users_list{
+    grid-row-start: 2;
+    grid-row-end: 4;
+
+    grid-column-start: 4;
+    grid-column-end: 5;
+
+    padding-top: 50px;
+}
+
+.chat_room_list{
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+.chat_channels_list{
+    grid-row-start: 2;
+    grid-row-end: 3;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.chat_type_box{
+    grid-column-start: 3;
+    grid-column-end: 4;
+
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+#message{
+    background: rgba(40,40,40,0.8);
+    width: 80%;
+    height: 68px;
+    position: relative;
+    top: 9px;
+    left: 14px;
+    border-radius: 20px;
+    border: rgba(40,40,40,0.8);
+    padding-top: 20px;
+    outline: none;
+}
+
+.chat_logo{
+    grid-column-start: 1;
+    grid-column-end: 2;
+
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    width: 100%;
+    height: 100%;
+}
+
+.data{
+    color: palegreen;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+
+
+
+td{
+    padding: 15px;
+}
+
+.data:hover{
+    background: palegreen;
+    color: #000018;
+}
+
+table{
+    width: 100%;
+}
+
+#online{
+    color: cornsilk;
+    width: 21%;
+    margin: auto;
+}
+
+#offline{
+    color: orangered;
+    width: 28%;
+    margin: auto;
+}
+
+#send{
+    width: 30px;
+    height: 60px;
+    padding-left: 50px;
+    margin-left: 20px;
+}

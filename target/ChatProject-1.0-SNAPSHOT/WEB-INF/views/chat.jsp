@@ -77,9 +77,10 @@
 
             <div class="chat_message_box">
                 <table>
-                    <tbody>
+                    <tbody id = "chat_row">
                         <c:forEach items="${messages}" var="message">
-                            <tr><td style="color: wheat">${message.content}</td></tr>
+                            <tr><td style="color: wheat">${message.user.username}:
+                                    ${message.content}</td></tr>
                         </c:forEach>
                     </tbody>
                 </table>
@@ -100,15 +101,62 @@
 
 
             <div class="chat_type_box">
-                <form action="/type?roomId=${roomId}&channelId=${channelId}&userId=${user.getId()}" method="post">
+<%--                <form action="/type?roomId=${roomId}&channelId=${channelId}&userId=${user.getId()}" method="post">--%>
+
                     <input type="text" id="message" placeholder="Write on this channel..." name="message">
-                    <button type="submit" style="display: none"/>
-                </form>
+
             </div>
 
 
 
 
         </div>
-</body>
+
+        <script>
+            const connection = new WebSocket("ws://localhost:8082");
+            const text = document.getElementById("message")
+            connection.onopen = (event) => {
+                console.log("WebSocket is open now.");
+            };
+
+            connection.onclose = (event) => {
+                console.log("WebSocket is closed now.");
+            };
+
+            connection.onerror = (event) => {
+                console.error("WebSocket error observed:", event);
+            };
+
+            text.addEventListener("keyup", ()=>{
+                if(event.keyCode === 13){
+                    const username = "${user.getUsername()}";
+                    const message = text.value;
+                    const channel = "${channelId}"
+                    const data = channel + " " + `<tr><td style="color: wheat">` + username + ": " + message + '</td></tr>';
+
+                    console.log(data);
+
+                    connection.send(data);
+
+                    text.value = "";
+
+                }
+            })
+
+            connection.onmessage = (event) =>{
+                    var channel = event.data.split(" ",1);
+                    var message = event.data.replace(channel,"");
+                if(channel == "${channelId}"){
+                    const chat = document.querySelector("#chat_row");
+                    chat.innerHTML += message;
+                    console.log(message);
+                }else {
+                    console.log("zly kanał")
+                    console.log(channel);
+                }
+
+            }
+
+        </script>
+    </body>
 </html>

@@ -65,9 +65,9 @@ public class ChatController {
         req.getSession().setAttribute("roomId", roomId);
         req.getSession().setAttribute("channelId", channelId);
         req.getSession().setAttribute("channelName", channelDao.findById(id2).getName());
-        User currentUser = (User) req.getSession().getAttribute("user");
+
         long chId = Long.parseLong(channelId);
-        req.getSession().setAttribute("messages", messageRepository.findAllByUserIdAndChannelId(currentUser.getId(),chId) );
+        req.getSession().setAttribute("messages", messageRepository.findAllByChannelId(chId) );
 
         UsersStatus us = userDao.getUsersStatus(userDao.findAllUsersOnTheServer(id1));
         req.getSession().setAttribute("usersOnline", us.getOnline());

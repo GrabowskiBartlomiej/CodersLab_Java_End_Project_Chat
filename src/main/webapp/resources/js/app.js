@@ -1,8 +1,3 @@
-
-
-
-
-
 $(".username").focus(function(){
     $(".username-help").slideDown(500);
 }).blur(function(){

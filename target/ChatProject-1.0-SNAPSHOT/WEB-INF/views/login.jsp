@@ -15,7 +15,7 @@
                 <h1 id="title">Welcome back!</h1>
                 <p id="description">We are happy you decided to come back!</p>
 
-                <form class="form" id="form" method="post" onsubmit="return myFunction()" action="/login">
+                <form class="form" id="form" method="post" action="/login">
                     <input type="email" class="email" name="email" placeholder="Email" required>
                     <input type="password" id="password" class="password" name="password" placeholder="Password" required>
                     <input type="submit" class="submit" value="Log In">
