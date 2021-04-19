@@ -4,6 +4,8 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 import pl.coderslab.app.AppConfig;
+import pl.coderslab.app.SocketConfig;
+
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -21,7 +23,11 @@ public class AppInitializer implements WebApplicationInitializer {
 
         // configure spring context
         context.register(AppConfig.class);
+        context.register(SocketConfig.class);
         context.setServletContext(servletContext);
+
+
+
 
         // create DispatcherServlet
         ServletRegistration.Dynamic dispatcherServlet =

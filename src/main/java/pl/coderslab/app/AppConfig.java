@@ -1,8 +1,10 @@
 package pl.coderslab.app;
 
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
@@ -17,12 +19,15 @@ import pl.coderslab.repository.MessageRepository;
 
 import javax.persistence.EntityManagerFactory;
 
+
 @Configuration //config
 @EnableWebMvc //webowa
 @ComponentScan(basePackages = "pl.coderslab") //gdzie szukac componentow
 @EnableTransactionManagement //zarzadzanie transakcjami (crud)
 @EnableJpaRepositories(basePackageClasses = MessageRepository.class)
-public class AppConfig implements WebMvcConfigurer {
+@Import(SocketConfig.class)
+public class AppConfig implements WebMvcConfigurer/*, InitializingBean*/ {
+
     @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {
         LocalEntityManagerFactoryBean entityManagerFactoryBean
@@ -53,5 +58,13 @@ public class AppConfig implements WebMvcConfigurer {
                 .addResourceLocations("/resources/");
     }
 
+
+//    @Override
+//    public void afterPropertiesSet() throws Exception {
+//        new Thread(() -> {
+//            ChatServer server = new ChatServer();
+//            server.execute();
+//        }).start();
+//    }
 
 }

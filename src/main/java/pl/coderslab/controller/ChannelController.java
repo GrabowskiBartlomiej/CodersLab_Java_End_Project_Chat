@@ -1,5 +1,6 @@
 package pl.coderslab.controller;
 
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Controller;
@@ -46,8 +47,8 @@ public class ChannelController {
     }
 
 
-    @PostMapping("/type")
-    public String addMessage(@RequestParam long roomId, @RequestParam long userId, @RequestParam long channelId, @RequestParam String message, HttpSession session) {
+
+    public void addMessage(@RequestParam long roomId, @RequestParam long userId, @RequestParam long channelId, @RequestParam String message, HttpSession session) {
         Message message1 = new Message();
         User user = userDao.findById(userId);
         Channel channel = channelDao.findById(channelId);
@@ -59,7 +60,6 @@ public class ChannelController {
 
         messageDao.addMessage(message1);
 
-        return "redirect:/chat/" + roomId + "/" + channelId;
     }
 
 

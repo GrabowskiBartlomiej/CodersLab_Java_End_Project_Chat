@@ -1,19 +1,15 @@
 //package pl.coderslab.sockets;
 //
-//import pl.coderslab.entity.Message;
-//import pl.coderslab.repository.MessageRepository;
-//
-//import javax.servlet.http.HttpSession;
 //import java.io.IOException;
 //import java.net.ServerSocket;
 //import java.net.Socket;
 //import java.util.HashSet;
-//import java.util.List;
+//
 //import java.util.Set;
 //
 //public class ChatServer {
 //    private final static int port = 8989;
-//    private Set<UserThread> userThreads = new HashSet<>();
+//    private static Set<UserThread> userThreads = new HashSet<>();
 //
 //    public void execute() {
 //        try (ServerSocket serverSocket = new ServerSocket(port)) {
@@ -34,4 +30,11 @@
 //            ex.printStackTrace();
 //        }
 //    }
+//
+//    public static void broadcast() {
+//        for (UserThread aUser : userThreads) {
+//            System.out.println(aUser);
+//        }
+//    }
+//
 //}

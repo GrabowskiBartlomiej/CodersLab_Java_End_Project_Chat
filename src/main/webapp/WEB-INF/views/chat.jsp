@@ -4,7 +4,6 @@
 <html>
 <head>
     <%@include file="/resources/web-fragments/head.jsp"%>
-
     <title>Wolfpack</title>
 </head>
     <body>
@@ -105,6 +104,7 @@
 
                     <input type="text" id="message" placeholder="Write on this channel..." name="message">
 
+
             </div>
 
 
@@ -113,8 +113,15 @@
         </div>
 
         <script>
-            const connection = new WebSocket("ws://localhost:8082");
+
+            $(document).ready(function (){
+                console.log("page loaded")
+            })
+
+            const connection = new WebSocket("ws://localhost:8080/chat");
+
             const text = document.getElementById("message")
+
             connection.onopen = (event) => {
                 console.log("WebSocket is open now.");
             };
@@ -127,8 +134,12 @@
                 console.error("WebSocket error observed:", event);
             };
 
-            text.addEventListener("keyup", ()=>{
-                if(event.keyCode === 13){
+
+
+
+
+            text.addEventListener("keyup", (event)=>{
+                if(event.code === "Enter"){
                     const username = "${user.getUsername()}";
                     const message = text.value;
                     const channel = "${channelId}"
@@ -136,12 +147,15 @@
 
                     console.log(data);
 
+
                     connection.send(data);
 
                     text.value = "";
 
                 }
             })
+
+
 
             connection.onmessage = (event) =>{
                     var channel = event.data.split(" ",1);
@@ -151,11 +165,12 @@
                     chat.innerHTML += message;
                     console.log(message);
                 }else {
-                    console.log("zly kanał")
+                    console.log("wrong channel")
                     console.log(channel);
                 }
 
             }
+
 
         </script>
     </body>
