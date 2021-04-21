@@ -1,95 +1,58 @@
 package pl.coderslab.controller;
 
-//import com.mysql.cj.PreparedQuery;
-//import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import pl.coderslab.dao.RoomDao;
-import pl.coderslab.dao.UserDao;
-import pl.coderslab.entity.Room;
 import pl.coderslab.entity.User;
-import pl.coderslab.entity.UsersStatus;
+import pl.coderslab.services.UserService;
+
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Controller
 public class UserController {
 
-    private final UserDao userDao;
-    private final RoomDao roomDao;
+    @Autowired
+    UserService userService;
 
-
-
-    public UserController(UserDao userDao, RoomDao roomDao){
-        this.userDao = userDao;
-        this.roomDao = roomDao;
-
-    }
 
     @RequestMapping("/")
     public String HomePage() {
         return "home";
     }
 
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login() {
-        return new ModelAndView("login");
+    public String login() {
+        return "login";
     }
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String logged(@RequestParam String email, @RequestParam String password, HttpServletRequest req) {
-        if (userDao.login(email, password) == null) {
+        User user = userService.loginAttempt(email, password);
+
+        if (user == null) {
             return "login";
         } else {
-
-
-            User user = userDao.login(email, password);
-
-            user.setStatus(3);
-            userDao.update(user);
-
-            UsersStatus us = userDao.getUsersStatus(userDao.findAllUsersOnTheServer(1));
-
-            req.getSession().setAttribute("usersOnline", us.getOnline());
-            req.getSession().setAttribute("usersOffline", us.getOffline());
-
-            req.getSession().setAttribute("user", user);
-            req.getSession().setAttribute("rooms", user.getRooms());
-
+            userService.loginAndSetSession(user, req);
             return "redirect:/chat/1/1";
         }
     }
 
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public ModelAndView register() {
-        return new ModelAndView("register");
+    public String register() {
+        return "register";
     }
 
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerPost(@RequestParam String username, @RequestParam String email, @RequestParam String password, @RequestParam String re_password, HttpServletRequest req) {
-
-        if (re_password.equals(password)) {
-            password = userDao.hashPassword(password);
-            System.out.println(password);
-            User user = new User();
-            user.setPassword(password);
-            user.setEmail(email);
-            user.setUsername(username);
-            List<Room> rooms = new ArrayList<>();
-            rooms.add(roomDao.findById(1));
-            user.setRooms(rooms);
-            user.setStatus(0);
-            userDao.addUser(user);
-            req.getSession().setAttribute("username", username);
+        if (userService.checkPasswords(password, re_password)) {
+            userService.successRegistration(password, email, username, req);
             return "successRegister";
         } else {
             return "register";
@@ -98,11 +61,8 @@ public class UserController {
 
 
     @RequestMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        User user = (User) request.getSession().getAttribute("user");
-        user.setStatus(0);
-        userDao.update(user);
-        request.getSession().removeAttribute("user");
+    public String logout(HttpServletRequest req) {
+        userService.logout(req);
         return ("home");
     }
 

@@ -37,9 +37,9 @@
                 <table>
                     <tbody>
                         <c:forEach items="${rooms}" var="room">
-                            <tr><td><a href="/chat/${room.getId()}/1"><img style="width: 100%; border-radius: 40px;height: 100%" src="${room.logo}"/></a></td></tr>
+                            <tr><td><a href="/chat/${room.getId()}"><img style="width: 100%; border-radius: 40px;height: 100%" src="${room.getLogo()}"/></a></td></tr>
                         </c:forEach>
-                            <tr><td><a href="/chat/addRoom"><img style="width: 100%;height: 100%;border-radius: 40px" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/plus-166-825753.png" /></a> </td></tr>
+                            <tr><td><a href="/chat/addRoom"><img class="immagine" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/plus-166-825753.png" /></a> </td></tr>
                     </tbody>
                 </table>
             </div>
@@ -100,7 +100,6 @@
 
 
             <div class="chat_type_box">
-<%--                <form action="/type?roomId=${roomId}&channelId=${channelId}&userId=${user.getId()}" method="post">--%>
 
                     <input type="text" id="message" placeholder="Write on this channel..." name="message">
 
@@ -143,7 +142,7 @@
                     const username = "${user.getUsername()}";
                     const message = text.value;
                     const channel = "${channelId}"
-                    const data = channel + " " + `<tr><td style="color: wheat">` + username + ": " + message + '</td></tr>';
+                    const data = channel + " ${user.getId()}" + " :" + username + ": " + message;
 
                     console.log(data);
 
@@ -158,11 +157,15 @@
 
 
             connection.onmessage = (event) =>{
-                    var channel = event.data.split(" ",1);
-                    var message = event.data.replace(channel,"");
+                    var channel = event.data.split(" ", 1);
+                    var message = event.data.replace(channel + " ", "");
+                    var userId = message.split(" ", 1);
+                    message = message.replace(userId + " :", "");
+
+
                 if(channel == "${channelId}"){
                     const chat = document.querySelector("#chat_row");
-                    chat.innerHTML += message;
+                    chat.innerHTML += `<tr><td style="color: wheat">` + message + '</td></tr>';
                     console.log(message);
                 }else {
                     console.log("wrong channel")
@@ -170,7 +173,6 @@
                 }
 
             }
-
 
         </script>
     </body>

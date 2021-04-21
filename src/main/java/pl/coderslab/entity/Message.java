@@ -1,6 +1,5 @@
 package pl.coderslab.entity;
 
-import com.sun.xml.bind.v2.model.core.ID;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

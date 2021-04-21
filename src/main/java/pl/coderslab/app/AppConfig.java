@@ -1,6 +1,5 @@
 package pl.coderslab.app;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import pl.coderslab.repository.MessageRepository;
-
 
 import javax.persistence.EntityManagerFactory;
 
@@ -57,14 +55,5 @@ public class AppConfig implements WebMvcConfigurer/*, InitializingBean*/ {
                 .addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
     }
-
-
-//    @Override
-//    public void afterPropertiesSet() throws Exception {
-//        new Thread(() -> {
-//            ChatServer server = new ChatServer();
-//            server.execute();
-//        }).start();
-//    }
 
 }

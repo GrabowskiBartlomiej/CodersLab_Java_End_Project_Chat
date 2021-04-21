@@ -266,10 +266,6 @@ input[type="submit"]:hover{
     grid-template-rows: 70px 1fr 90px;
 }
 
-.chat_container div{
-    border:1px solid palegreen;
-}
-
 .chat_room{
     grid-column-start: 2;
     grid-column-end: 3;
@@ -278,7 +274,7 @@ input[type="submit"]:hover{
     font-family: 'Roboto';
     padding-left: 5px;
     padding-top: 21px;
-    background: rgba(10,10,10,0.3);
+    background: #1a1a1a;
 }
 
 .chat_channel{
@@ -289,6 +285,7 @@ input[type="submit"]:hover{
     color: cornsilk;
     font-size: 30px;
     font-family: 'Roboto';
+    background: #1a1a1a;
 }
 
 .chat_user{
@@ -297,14 +294,27 @@ input[type="submit"]:hover{
 
     grid-column-start: 2;
     grid-column-end: 3;
+
+    background: #262626;
 }
 
 .chat_message_box{
     grid-row-start: 2;
-    grid-row-end: 4;
+    grid-row-end: 3;
 
     grid-column-start: 3;
     grid-column-end: 4;
+
+    overflow: hidden;
+    overflow-y: scroll;
+
+    display: flex;
+    flex-direction: column-reverse;
+
+    scrollbar-color: gray #595959;
+    scrollbar-width: thin;
+
+    background: #595959;
 }
 
 .chat_users_list{
@@ -315,6 +325,14 @@ input[type="submit"]:hover{
     grid-column-end: 5;
 
     padding-top: 50px;
+
+    overflow: hidden;
+    overflow-y: scroll;
+
+    scrollbar-color: gray #333333;
+    scrollbar-width: thin;
+
+    background: #333333;
 }
 
 .chat_room_list{
@@ -323,6 +341,14 @@ input[type="submit"]:hover{
 
     grid-row-start: 2;
     grid-row-end: 4;
+
+    overflow: hidden;
+    overflow-y: scroll;
+
+    scrollbar-color: gray #1a1a1a;
+    scrollbar-width: thin;
+
+    background: #1a1a1a;
 }
 
 .chat_channels_list{
@@ -331,6 +357,14 @@ input[type="submit"]:hover{
 
     grid-column-start: 2;
     grid-column-end: 3;
+
+    overflow: hidden;
+    overflow-y: scroll;
+
+    scrollbar-color: gray #333333;
+    scrollbar-width: thin;
+
+    background: #333333;
 }
 
 .chat_type_box{
@@ -339,6 +373,7 @@ input[type="submit"]:hover{
 
     grid-row-start: 3;
     grid-row-end: 4;
+    background: #595959;
 }
 
 #message{
@@ -397,11 +432,4 @@ table{
     color: orangered;
     width: 28%;
     margin: auto;
-}
-
-#send{
-    width: 30px;
-    height: 60px;
-    padding-left: 50px;
-    margin-left: 20px;
 }

@@ -1,7 +1,6 @@
 package pl.coderslab.dao;
 
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import pl.coderslab.entity.User;
 import pl.coderslab.entity.UsersStatus;
@@ -41,27 +40,27 @@ public class UserDao {
                 user : entityManager.merge(user));
     }
 
-    public static String hashPassword(String password){
+    public static String hashPassword(String password) {
         return BCrypt.hashpw(password, org.mindrot.jbcrypt.BCrypt.gensalt());
     }
 
-    public static boolean validatePassword(String password){
+    public static boolean validatePassword(String password) {
         Matcher matcher = CHECK_PASSWORD.matcher(password);
         return matcher.matches();
     }
 
 
-    public List<User> findAll(){
-        Query query = entityManager.createQuery("select u from User u");  // albo zamiast pakietowej po prostu Book
+    public List<User> findAll() {
+        Query query = entityManager.createQuery("select u from User u");
         return query.getResultList();
     }
 
-    public User login(String userEmail,String userPassword){
+    public User login(String userEmail, String userPassword) {
         List<User> allUsers = findAll();
-        for (User user: allUsers) {
-            if(user.getEmail().equalsIgnoreCase(userEmail)){
-                System.out.println("true "+ user.getEmail());
-                if(BCrypt.checkpw(userPassword,user.getPassword())){
+        for (User user : allUsers) {
+            if (user.getEmail().equalsIgnoreCase(userEmail)) {
+                System.out.println("true " + user.getEmail());
+                if (BCrypt.checkpw(userPassword, user.getPassword())) {
                     return user;
                 }
 
@@ -71,19 +70,19 @@ public class UserDao {
     }
 
 
-    public List<User> findAllUsersOnTheServer(long id){
+    public List<User> findAllUsersOnTheServer(long id) {
         Query query = entityManager.createQuery("select u from User u join u.rooms r where r.id =: id");
-        query.setParameter("id",id);
+        query.setParameter("id", id);
         return query.getResultList();
     }
 
-    public UsersStatus getUsersStatus(List<User> usersOnTheServer){
+    public UsersStatus getUsersStatus(List<User> usersOnTheServer) {
         List<User> usersOnline = new ArrayList<>();
         List<User> usersOffline = new ArrayList<>();
-        for(User user : usersOnTheServer){
+        for (User user : usersOnTheServer) {
             if (user.getStatus() == 0) {
                 usersOffline.add(user);
-            }else {
+            } else {
                 usersOnline.add(user);
             }
         }

@@ -16,7 +16,7 @@ public class User {
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Room> rooms;
-    @Column(columnDefinition="COLUMN_TYPE default '0'")
+    @Column(columnDefinition = "COLUMN_TYPE default '0'")
     private long status;
     private String avatar = "https://www.hubitools.com/assets/36cb0984-e7f7-4b98-97e7-abbbd6fa3fc0/260x200/new.png";
 

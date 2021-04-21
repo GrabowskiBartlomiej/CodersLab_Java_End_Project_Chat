@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
-    <%@include file="/resources/web-fragments/head.jsp"%>
+    <%@include file="/resources/web-fragments/head.jsp" %>
     <title>Add Room</title>
 </head>
 <body>

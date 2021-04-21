@@ -11,7 +11,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String logo = "https://logopond.com/logos/b1de93f14263ad77eb5cc53a40ff8d9b.png";
+    private String logo = "https://i.dlpng.com/static/png/6166957-wolf-logo-stock-vector-vector-premium-download-wolf-logo-626_626_preview.png";
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Channel> channels;
@@ -40,7 +40,6 @@ public class Room {
     public void setLogo(String logo) {
         this.logo = logo;
     }
-
 
 
     public void setChannels(List<Channel> channels) {

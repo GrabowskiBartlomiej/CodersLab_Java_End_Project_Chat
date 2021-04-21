@@ -2,7 +2,6 @@ package pl.coderslab.dao;
 
 import org.springframework.stereotype.Repository;
 import pl.coderslab.entity.Message;
-import pl.coderslab.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,8 +33,8 @@ public class MessageDao {
                 message : entityManager.merge(message));
     }
 
-    public List<Message> findAll(){
-        Query query = entityManager.createQuery("select m from Message m");  // albo zamiast pakietowej po prostu Book
+    public List<Message> findAll() {
+        Query query = entityManager.createQuery("select m from Message m");
         return query.getResultList();
     }
 }

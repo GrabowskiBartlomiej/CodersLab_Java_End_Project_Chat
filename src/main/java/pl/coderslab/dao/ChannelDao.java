@@ -1,17 +1,13 @@
 package pl.coderslab.dao;
 
-import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import pl.coderslab.entity.Channel;
-import pl.coderslab.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.regex.Matcher;
 
 
 @Transactional
@@ -38,8 +34,8 @@ public class ChannelDao {
                 channel : entityManager.merge(channel));
     }
 
-    public List<Channel> findAll(){
-        Query query = entityManager.createQuery("select c from Channel c");  // albo zamiast pakietowej po prostu Book
+    public List<Channel> findAll() {
+        Query query = entityManager.createQuery("select c from Channel c");
         return query.getResultList();
     }
 }
