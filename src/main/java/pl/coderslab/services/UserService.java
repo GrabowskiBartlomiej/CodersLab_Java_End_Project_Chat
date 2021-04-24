@@ -67,4 +67,12 @@ public class UserService {
         userDao.update(user);
         req.getSession().removeAttribute("user");
     }
+
+    public void logoutAll(){
+        List<User> allUsers = userDao.findAll();
+        for(User user : allUsers){
+            user.setStatus(0);
+            userDao.update(user);
+        }
+    }
 }

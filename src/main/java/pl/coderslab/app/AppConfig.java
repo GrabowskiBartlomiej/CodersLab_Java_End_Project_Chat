@@ -1,5 +1,8 @@
 package pl.coderslab.app;
 
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +17,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import pl.coderslab.repository.MessageRepository;
+import pl.coderslab.services.UserService;
 
+import javax.annotation.PreDestroy;
 import javax.persistence.EntityManagerFactory;
 
 
@@ -24,7 +29,10 @@ import javax.persistence.EntityManagerFactory;
 @EnableTransactionManagement //zarzadzanie transakcjami (crud)
 @EnableJpaRepositories(basePackageClasses = MessageRepository.class)
 @Import(SocketConfig.class)
-public class AppConfig implements WebMvcConfigurer/*, InitializingBean*/ {
+public class AppConfig implements WebMvcConfigurer {
+
+    @Autowired
+    UserService userService;
 
     @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {
@@ -54,6 +62,11 @@ public class AppConfig implements WebMvcConfigurer/*, InitializingBean*/ {
         registry
                 .addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/");
+    }
+
+    @PreDestroy
+    public void logoutAll(){
+        userService.logoutAll();
     }
 
 }

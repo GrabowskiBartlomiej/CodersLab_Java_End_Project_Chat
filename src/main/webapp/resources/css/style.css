@@ -257,7 +257,7 @@ input[type="submit"]:hover{
 .chat_container{
     width: 100vw;
     height: 100vh;
-    background: #000018;
+    background: #1a1a1a;
 
     font-size: 20px;
     display: grid;
@@ -279,7 +279,7 @@ input[type="submit"]:hover{
 
 .chat_channel{
     grid-column-start: 3;
-    grid-column-end: 5;
+    grid-column-end: 4;
 
     padding: 15px;
     color: cornsilk;
@@ -434,7 +434,11 @@ table{
     margin: auto;
 }
 
-.chat_room_list tr:hover{       /*podswietlenie kanalu*/
+.chat_room_list tr:hover .get-name{       /*podswietlenie kanalu*/
+    color: black;
+}
+
+.chat_room_list tr:hover{
     background-color: palegreen;
 }
 
@@ -442,4 +446,91 @@ table{
     width: 100%;
     height: 100%;
     border-radius: 50%;
+}
+
+.about-dropdown{
+    display: none;
+    position: absolute;
+
+    background-color: #191919;
+    min-width: 220px;
+    min-height: 200px;
+    box-shadow: 0 0 4px 3px rgba(0,0,0,0.1);
+    z-index: 3000;
+    margin-top: 30px;
+    margin-left: 8px;
+    border-radius: 15px;
+    transition: 0.8s;
+}
+
+.about-dropdown a{
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #898989;
+    padding: 15px;
+}
+
+.about-dropdown a:hover{
+    color: white;
+}
+
+
+.room_options{
+    text-decoration: none;
+    color: gray;
+    float: right;
+    display: inline-block;
+    padding-right: 15px;
+    font-size: 35px
+}
+
+.room_name{
+    color: palegreen;
+    font-size: 30px;
+    display: inline-block;
+}
+
+
+.about-dropdown-channel{
+    display: none;
+    position: absolute;
+
+    background-color: #191919;
+    min-width: 220px;
+    min-height: 100px;
+    box-shadow: 0 0 4px 3px rgba(0,0,0,0.1);
+    z-index: 3000;
+    margin-top: 30px;
+    margin-left: 64%;
+    border-radius: 15px;
+    transition: 0.8s;
+}
+
+.about-dropdown-channel a{
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #898989;
+    padding: 15px;
+    font-size: 20px;
+}
+
+.about-dropdown-channel a:hover{
+    color: white;
+}
+
+.channel_options{
+    text-decoration: none;
+    color: gray;
+    float: right;
+    display: inline-block;
+    padding-right: 15px;
+    font-size: 35px;
+}
+
+.get-name{
+    font-size: 12px;
+    color: wheat;
+    text-align: center;
 }

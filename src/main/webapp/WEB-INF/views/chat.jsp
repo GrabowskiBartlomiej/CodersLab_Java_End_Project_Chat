@@ -22,12 +22,39 @@
 
 
 
-            <div class="chat_room">${roomName}</div>
+            <div class="chat_room">
+
+                            <p class="room_name">${roomName}</p>
+
+                            <a href="#" class="room_options">+</a>
+                            <div class="about-dropdown">
+                                <a href="index.html#contact-anchor">Add user to the room</a>
+                                <a href="index.html#core-services-anchor">Add channel</a>
+                                <a href="index.html#core-services-anchor">Change room's logo</a>
+                                <a href="index.html#atandl-anchor">Change room's name</a>
+                                <a href="index.html#hseq-anchor">Leave the room</a>
+                            </div>
+
+            </div>
 
 
 
 
-            <div class="chat_channel"> ${channelName}</div>
+            <div class="chat_channel">
+
+                <p class="room_name"> ${channelName} </p>
+
+                <a href="#" class="channel_options">V</a>
+
+                <div class="about-dropdown-channel">
+
+                    <a href="#">Edit channel</a>
+                    <a href="#">Delete channel</a>
+
+                </div>
+
+
+            </div>
 
 
 
@@ -37,7 +64,9 @@
                 <table>
                     <tbody>
                         <c:forEach items="${rooms}" var="room">
-                            <tr><td><a href="/chat/${room.getId()}"><img style="width: 100%; border-radius: 40px;height: 100%" src="${room.getLogo()}"/></a></td></tr>
+                                <tr><td><a href="/chat/${room.getId()}"><img style="width: 100%; border-radius: 40px;height: 100%" src="${room.getLogo()}"/></a>
+                                    <p class="get-name">${room.getName()}</p>
+                                </td></tr>
                         </c:forEach>
                             <tr><td><a href="/chat/addRoom"><img class="immagine" src="https://cdn.iconscout.com/icon/premium/png-256-thumb/plus-166-825753.png" /></a> </td></tr>
                     </tbody>
@@ -71,6 +100,7 @@
 
 
             <div class="chat_user">
+                <img src="${user.getAvatar()}" style="border-radius: 40px;width: 20%"/>
                 ${user.getUsername()}
             </div>
 
@@ -101,7 +131,7 @@
 
             <div class="chat_type_box">
 
-                    <input type="text" id="message" placeholder="Write on this channel..." name="message">
+                    <input type="text"  autocomplete="off" id="message" placeholder="Write on this channel..." name="message">
 
 
             </div>
@@ -173,6 +203,46 @@
                 }
 
             }
+
+            const roomOptions = document.querySelector(".room_options");
+            const roomOptionsDropdown = document.querySelector(".about-dropdown")
+
+            roomOptions.addEventListener("mouseover", function (){
+                console.log("najechalo sie")
+                var style = window.getComputedStyle(roomOptionsDropdown);
+                var display = style.getPropertyValue('display');
+
+                if(display == 'none'){
+                    console.log("zmiana na block")
+                    roomOptionsDropdown.style.display = 'block';
+                    roomOptions.style.color = 'white';
+                }else{
+                    console.log("zmiana na none")
+                    roomOptionsDropdown.style.display = 'none';
+                    roomOptions.style.color = '#898989';
+                }
+            })
+
+
+
+            const channelOptions = document.querySelector(".channel_options");
+            const channelOptionsDropdown = document.querySelector(".about-dropdown-channel")
+
+            channelOptions.addEventListener("mouseover", function (){
+                console.log("najechalo sie")
+                var style = window.getComputedStyle(channelOptionsDropdown);
+                var display = style.getPropertyValue('display');
+
+                if(display == 'none'){
+                    console.log("zmiana na block")
+                    channelOptionsDropdown.style.display = 'block';
+                    channelOptions.style.color = 'white';
+                }else{
+                    console.log("zmiana na none")
+                    channelOptionsDropdown.style.display = 'none';
+                    channelOptions.style.color = '#898989';
+                }
+            })
 
         </script>
     </body>
