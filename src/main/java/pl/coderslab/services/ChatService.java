@@ -79,7 +79,6 @@ public class ChatService {
     }
 
 
-
     public long getChannelIdFromMessage(String message) {
         String[] parts = message.split("\\s+");
         long id = Long.parseLong(parts[0]);
@@ -102,6 +101,7 @@ public class ChatService {
         long id1 = Long.parseLong(roomId);
         long id2 = Long.parseLong(channelId);
         Room currentRoom = roomDao.findById(id1);
+        User user = (User) req.getSession().getAttribute("user");
 
         List<Channel> channels = currentRoom.getChannels();
         req.getSession().setAttribute("channels", channels);
@@ -112,7 +112,8 @@ public class ChatService {
 
         long chId = Long.parseLong(channelId);
         req.getSession().setAttribute("messages", messageRepository.findAllByChannelId(chId));
-
+        req.getSession().removeAttribute("rooms");
+        req.getSession().setAttribute("rooms", user.getRooms());
         UsersStatus us = userDao.getUsersStatus(userDao.findAllUsersOnTheServer(id1));
         req.getSession().setAttribute("usersOnline", us.getOnline());
         req.getSession().setAttribute("usersOffline", us.getOffline());
@@ -125,6 +126,35 @@ public class ChatService {
         return address;
     }
 
-}
+    public long addNewChannel(String channelName, long id) {
+        Channel channel = new Channel();
+        channel.setName(channelName);
+        Room room = roomDao.findById(id);
+        List<Channel> channels = room.getChannels();
+        channels.add(channel);
+        room.setChannels(channels);
+        channelDao.addChannel(channel);
+        roomDao.update(room);
+        return channel.getId();
+    }
 
+    public void changeLogo(long roomId, String logoUrl, HttpServletRequest req) {
+        System.out.println("jestem tuuu");
+        Room room = roomDao.findById(roomId);
+        User user = (User) req.getSession().getAttribute("user");
+        List<Room> rooms = user.getRooms();
+        int index;
+        for(Room ro : rooms){
+            if(ro.getId() == room.getId()){
+                index = rooms.indexOf(ro);
+                rooms.set(index, room);
+            }
+        }
+        room.setLogo(logoUrl);
+        roomDao.update(room);
+        user.setRooms(rooms);
+        userDao.update(user);
+        req.getSession().setAttribute("user", user);
+    }
+}
 
