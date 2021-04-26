@@ -15,7 +15,7 @@
             <form class="form" id="form" method="post" action="/chat/addRoom">
                 <input type="text" name="roomName" placeholder="Insert rooms name" required>
                 <input type="text" name="roomLogo" placeholder="Paste URL for rooms logo (not required)">
-                <input type="submit" class="submit" value="Log In">
+                <input type="submit" class="submit" value="Create">
             </form>
         </div>
     </div>

@@ -21,11 +21,11 @@
 
                             <a href="#" class="room_options">+</a>
                             <div class="about-dropdown">
-                                <a href="index.html#contact-anchor">Add user to the room</a>
+                                <a href="#" onclick="addUsers()">Add user to the room</a>
                                 <a href="#" onclick="addChannel()">Add channel</a>
                                 <a href="#" onclick="changeLogo()">Change room's logo</a>
-                                <a href="index.html#atandl-anchor">Change room's name</a>
-                                <a href="index.html#hseq-anchor">Leave the room</a>
+                                <a href="#" onclick="changeRoomName()">Change room's name</a>
+                                <a href="#" onclick="leaveRoom()">Leave the room</a>
                             </div>
 
             </div>
@@ -120,6 +120,7 @@
                     <input type="text" name="channelName" required="">
                     <label>Channel Name</label>
                 </div>
+                <input type="button" name="" value="cancel" onclick="cancel()">
                 <input type="submit" name="" value="submit">
             </form>
         </div>
@@ -131,10 +132,53 @@
                     <input type="text" name="logoUrl" required="">
                     <label>New Avatar URL</label>
                 </div>
+                <input type="button" name="" value="cancel" onclick="cancel()">
                 <input type="submit" name="" value="submit">
             </form>
         </div>
 
+        <div class = "add-users-box" style="display: none">
+            <h2>Add Users</h2>
+            <form method="post" action="/addUsersToTheChannel/${roomId}/${channelId}">
+                <table>
+                    <c:forEach items="${allUsers}" var="users">
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="_checkbox" name="usersToAdd" value="${users.getId()}"/>
+                                <img src="${users.getAvatar()}" style="border-radius: 40px;width: 20%"/>
+                                <div style="color: chartreuse; border:none; display:inline;padding-left:20px;position:absolute;padding-top:13px">
+                                    <a href="#">${users.getUsername()}</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table><br>
+                <input type="button" name="" value="cancel" onclick="cancel()">
+                <input type="submit" name="" value="submit">
+            </form>
+        </div>
+
+
+        <div class = "change-room-name-box" style="display: none">
+            <h2>Change Room's Name</h2>
+            <form method="post" action="/changeRoomName/${roomId}/${channelId}">
+                <div class="input-channel-name">
+                    <input type="text" name="name" required="">
+                    <label>New Name</label>
+                </div>
+                <input type="button" name="" value="cancel" onclick="cancel()">
+                <input type="submit" name="" value="submit">
+            </form>
+        </div>
+
+
+        <div class = "leave-room-box" style="display: none">
+            <h2>Are you sure you want to leave this room?</h2>
+            <form method="post" action="/leaveRoom/${roomId}">
+                <input type="button" name="" value="cancel" onclick="cancel()">
+                <input type="submit" name="" value="delete">
+            </form>
+        </div>
 
 
         <script>
@@ -183,20 +227,30 @@
 
 
             connection.onmessage = (event) =>{
+
+                if(event.data === "ch3ckUs3rs"){
+
+                    var userList
+
+                }else{
                     var channel = event.data.split(" ", 1);
                     var message = event.data.replace(channel + " ", "");
                     var userId = message.split(" ", 1);
                     message = message.replace(userId + " :", "");
 
 
-                if(channel == "${channelId}"){
-                    const chat = document.querySelector("#chat_row");
-                    chat.innerHTML += `<tr><td style="color: wheat">` + message + '</td></tr>';
-                    console.log(message);
-                }else {
-                    console.log("wrong channel")
-                    console.log(channel);
+                    if(channel == "${channelId}"){
+                        const chat = document.querySelector("#chat_row");
+                        chat.innerHTML += `<tr><td style="color: wheat">` + message + '</td></tr>';
+                        console.log(message);
+                    }else {
+                        console.log("wrong channel")
+                        console.log(channel);
+                    }
                 }
+
+
+
 
             }
 
@@ -258,13 +312,49 @@
                 }
             }
 
+            const addUsersBox = document.querySelector(".add-users-box");
+            function addUsers(){
+                var style = window.getComputedStyle(addUsersBox);
+                var display = style.getPropertyValue('display');
+                if(display === 'none'){
+                    addUsersBox.style.display = 'block';
+                }
+            }
+
+            const changeRoomsName = document.querySelector(".change-room-name-box")
+            function changeRoomName(){
+                var style = window.getComputedStyle(changeRoomsName);
+                var display = style.getPropertyValue('display');
+                if(display === 'none'){
+                    changeRoomsName.style.display = 'block';
+                }
+            }
+
+            const leaveRoomBox = document.querySelector(".leave-room-box")
+            function leaveRoom(){
+                var style = window.getComputedStyle(leaveRoomBox);
+                var display = style.getPropertyValue('display');
+                if(display === 'none'){
+                    leaveRoomBox.style.display = 'block';
+                }
+            }
+
+
             document.addEventListener("keyup", (event) =>{
                 if(event.code === 'Escape'){
                     console.log("wciskam esc");
                     addChannelBox.style.display = 'none';
+                    roomOptionsDropdown.style.display = 'none';
+                    changeLogoBox.style.display = 'none';
+                    addUsersBox.style.display = 'none';
                 }
             })
 
+            function cancel(){
+                addChannelBox.style.display = 'none';
+                changeLogoBox.style.display = 'none';
+                addUsersBox.style.display = 'none';
+            }
         </script>
     </body>
 </html>

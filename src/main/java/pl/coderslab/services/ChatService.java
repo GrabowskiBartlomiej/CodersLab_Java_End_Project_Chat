@@ -11,7 +11,9 @@ import pl.coderslab.repository.MessageRepository;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ChatService {
@@ -32,7 +34,7 @@ public class ChatService {
 
     public String addNewRoom(String roomName, String roomLogo, HttpServletRequest req) {
         List<Channel> channels = new ArrayList<>();
-        User user = (User) req.getSession().getAttribute("user");
+        User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
 
         Channel channel = new Channel();
         channel.setName("General");
@@ -51,9 +53,9 @@ public class ChatService {
         roomDao.addRoom(room);
 
         List<Room> userRooms = user.getRooms();
-
         userRooms.add(room);
-        user.setRooms(userRooms);
+        List<Room> unique = userRooms.stream().distinct().collect(Collectors.toList());
+        user.setRooms(unique);
         userDao.update(user);
 
         return room.getId() + "/" + channel.getId();
@@ -101,22 +103,39 @@ public class ChatService {
         long id1 = Long.parseLong(roomId);
         long id2 = Long.parseLong(channelId);
         Room currentRoom = roomDao.findById(id1);
-        User user = (User) req.getSession().getAttribute("user");
-
+        User user = userDao.findById(((User) req.getSession().getAttribute("user")).getId());
+        UsersStatus us = userDao.getUsersStatus(userDao.findAllUsersOnTheServer(id1));
+        List<Room> rooms = user.getRooms();
+        List<Room> unique = rooms.stream().distinct().collect(Collectors.toList());
         List<Channel> channels = currentRoom.getChannels();
+        List<User> online = us.getOnline().stream().distinct().collect(Collectors.toList());
+        List<User> offline = us.getOffline().stream().distinct().collect(Collectors.toList());
+        List<User> usersOnTheChannel = userDao.findAllUsersOnTheServer(id1);
+        List<User> allUsers = userDao.findAll();
+
         req.getSession().setAttribute("channels", channels);
         req.getSession().setAttribute("roomName", currentRoom.getName());
         req.getSession().setAttribute("roomId", roomId);
         req.getSession().setAttribute("channelId", channelId);
         req.getSession().setAttribute("channelName", channelDao.findById(id2).getName());
-
-        long chId = Long.parseLong(channelId);
-        req.getSession().setAttribute("messages", messageRepository.findAllByChannelId(chId));
+        req.getSession().setAttribute("messages", messageRepository.findAllByChannelId(id2));
         req.getSession().removeAttribute("rooms");
-        req.getSession().setAttribute("rooms", user.getRooms());
-        UsersStatus us = userDao.getUsersStatus(userDao.findAllUsersOnTheServer(id1));
-        req.getSession().setAttribute("usersOnline", us.getOnline());
-        req.getSession().setAttribute("usersOffline", us.getOffline());
+        req.getSession().setAttribute("rooms", unique);
+        req.getSession().setAttribute("usersOnline", online);
+        req.getSession().setAttribute("usersOffline", offline);
+
+        for (Iterator<User> it = allUsers.iterator(); it.hasNext(); ) {
+            User next = it.next();
+            for (int i = 0; i < usersOnTheChannel.size(); i++) {
+                if (next.getId() == usersOnTheChannel.get(i).getId()) {
+                    it.remove(); //metoda remove() iteratora
+                    break;
+                }
+            }
+        }
+
+        req.getSession().setAttribute("allUsers", allUsers);
+        req.getSession().setAttribute("user", user);
     }
 
     public String firstChannel(String roomId) {
@@ -139,13 +158,12 @@ public class ChatService {
     }
 
     public void changeLogo(long roomId, String logoUrl, HttpServletRequest req) {
-        System.out.println("jestem tuuu");
         Room room = roomDao.findById(roomId);
         User user = (User) req.getSession().getAttribute("user");
         List<Room> rooms = user.getRooms();
         int index;
-        for(Room ro : rooms){
-            if(ro.getId() == room.getId()){
+        for (Room ro : rooms) {
+            if (ro.getId() == room.getId()) {
                 index = rooms.indexOf(ro);
                 rooms.set(index, room);
             }
@@ -156,5 +174,46 @@ public class ChatService {
         userDao.update(user);
         req.getSession().setAttribute("user", user);
     }
-}
 
+    public void addUsers(int[] usersToAdd, long rId) {
+
+        Room room = roomDao.findById(rId);
+        System.out.println(room);
+
+        for (int user : usersToAdd) {
+            User user1 = userDao.findById(user);
+            System.out.println(user1);
+            List<Room> rooms = user1.getRooms();
+            System.out.println(rooms);
+            List<Room> unique = rooms.stream().distinct().collect(Collectors.toList());
+            System.out.println(unique);
+            unique.add(room);
+            System.out.println(unique);
+            user1.setRooms(unique);
+            userDao.update(user1);
+
+        }
+    }
+
+    public void changeRoomName(String name, long rId) {
+        Room room = roomDao.findById(rId);
+        room.setName(name);
+        roomDao.update(room);
+    }
+
+    public void leaveRoom(long rId, HttpServletRequest req) {
+        User user = (User) req.getSession().getAttribute("user");
+        List<Room> rooms = user.getRooms();
+
+        for (Iterator<Room> it = rooms.iterator(); it.hasNext(); ) {
+            Room next = it.next();
+            if (next.getId() == rId) {
+                it.remove(); //metoda remove() iteratora
+            }
+        }
+
+        List<Room> unique = rooms.stream().distinct().collect(Collectors.toList());
+        user.setRooms(unique);
+        userDao.update(user);
+    }
+}

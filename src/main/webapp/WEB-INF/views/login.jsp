@@ -20,6 +20,9 @@
                 <input type="password" id="password" class="password" name="password" placeholder="Password" required>
                 <input type="submit" class="submit" value="Log In">
             </form>
+            <form class="form" action="/register">
+                <input type="submit" class="submit" value="Register" >
+            </form>
         </div>
     </div>
 </body>

@@ -4,6 +4,7 @@ package pl.coderslab.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.entity.User;
 import pl.coderslab.services.ChatService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,4 +50,21 @@ public class ChatController {
         return "redirect:/chat/" + rId + "/" + chId;
     }
 
+    @PostMapping("/addUsersToTheChannel/{rId}/{chId}")
+    public String addUsersToTheChannel(@RequestParam int[] usersToAdd, @PathVariable long rId, @PathVariable long chId) {
+        chatService.addUsers(usersToAdd, rId);
+        return "redirect:/chat/" + rId + "/" + chId;
+    }
+
+    @PostMapping("/changeRoomName/{rId}/{chId}")
+    public String changeRoomName(@RequestParam String name, @PathVariable long rId, @PathVariable long chId) {
+        chatService.changeRoomName(name, rId);
+        return "redirect:/chat/" + rId + "/" + chId;
+    }
+
+    @PostMapping("/leaveRoom/{rId}")
+    public String leaveRoom(@PathVariable long rId, HttpServletRequest req) {
+        chatService.leaveRoom(rId, req);
+        return "redirect:/chat/1/1";
+    }
 }

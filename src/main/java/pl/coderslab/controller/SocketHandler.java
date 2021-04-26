@@ -7,10 +7,14 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import pl.coderslab.entity.User;
+import pl.coderslab.entity.UsersStatus;
 import pl.coderslab.services.ChatService;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class SocketHandler extends TextWebSocketHandler {
@@ -33,11 +37,14 @@ public class SocketHandler extends TextWebSocketHandler {
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
-        chatService.addMessageToDB(message.getPayload());
+            chatService.addMessageToDB(message.getPayload());
 
-        for (WebSocketSession user : sessions) {
-            user.sendMessage(new TextMessage(message.getPayload()));
+            for (WebSocketSession user : sessions) {
+                user.sendMessage(new TextMessage(message.getPayload()));
+
         }
+
+
     }
 
     @Override

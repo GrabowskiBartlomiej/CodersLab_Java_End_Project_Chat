@@ -38,6 +38,8 @@ public class UserController {
             return "login";
         } else {
             userService.loginAndSetSession(user, req);
+
+
             return "redirect:/chat/1/1";
         }
     }

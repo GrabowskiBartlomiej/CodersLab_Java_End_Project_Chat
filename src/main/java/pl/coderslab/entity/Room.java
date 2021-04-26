@@ -11,7 +11,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String logo = "https://i.dlpng.com/static/png/6166957-wolf-logo-stock-vector-vector-premium-download-wolf-logo-626_626_preview.png";
+    private String logo = "https://scalebranding.com/wp-content/uploads/2020/05/cyber-wolf-logo.png";
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Channel> channels;
