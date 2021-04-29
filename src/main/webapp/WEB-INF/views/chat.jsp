@@ -37,10 +37,8 @@
                 <a href="#" class="channel_options">V</a>
 
                 <div class="about-dropdown-channel">
-
                     <a href="#">Edit channel</a>
                     <a href="#">Delete channel</a>
-
                 </div>
 
 
@@ -78,10 +76,22 @@
                 </table>
             </div>
 
+
+
+
             <div class="chat_user">
-                <img src="${user.getAvatar()}" style="border-radius: 40px;width: 20%"/>
-                ${user.getUsername()}
+                <a href="#" class="user_options" onclick="showUserOptions()"><img src="${user.getAvatar()}" style="border-radius: 40px;width: 20%"/><span>${user.getUsername()}</span></a>
+
+                <div class="user-dropdown" style="display: none">
+                    <a href="#" onclick="changeUserNickname()" >Change Nickname</a>
+                    <a href="#" onclick="changeUserAvatar()">Change Avatar</a>
+                    <a href="/logout" >Logout</a>
+                </div>
             </div>
+
+
+
+
 
             <div class="chat_message_box">
                 <table>
@@ -105,10 +115,7 @@
             </div>
 
             <div class="chat_type_box">
-
                     <input type="text"  autocomplete="off" id="message" placeholder="Write on this channel..." name="message">
-
-
             </div>
 
         </div>
@@ -180,6 +187,31 @@
             </form>
         </div>
 
+        <div class = "change-user-name-box" style="display: none">
+            <h2>Change User's Name</h2>
+            <form method="post" action="/changeUserName/${roomId}/${channelId}">
+                <div class="input-channel-name">
+                    <input type="text" name="name" required="">
+                    <label>New Name</label>
+                </div>
+                <input type="button" name="" value="cancel" onclick="cancel()">
+                <input type="submit" name="" value="submit">
+            </form>
+        </div>
+
+
+        <div class = "change-user-avatar-box" style="display: none">
+            <h2>Change User's Avatar</h2>
+            <form method="post" action="/changeUserAvatar/${roomId}/${channelId}">
+                <div class="input-channel-name">
+                    <input type="text" name="link" required="">
+                    <label>New Avatar</label>
+                </div>
+                <input type="button" name="" value="cancel" onclick="cancel()">
+                <input type="submit" name="" value="submit">
+            </form>
+        </div>
+
 
         <script>
 
@@ -227,17 +259,10 @@
 
 
             connection.onmessage = (event) =>{
-
-                if(event.data === "ch3ckUs3rs"){
-
-                    var userList
-
-                }else{
                     var channel = event.data.split(" ", 1);
                     var message = event.data.replace(channel + " ", "");
                     var userId = message.split(" ", 1);
                     message = message.replace(userId + " :", "");
-
 
                     if(channel == "${channelId}"){
                         const chat = document.querySelector("#chat_row");
@@ -247,11 +272,6 @@
                         console.log("wrong channel")
                         console.log(channel);
                     }
-                }
-
-
-
-
             }
 
             const roomOptions = document.querySelector(".room_options");
@@ -347,8 +367,39 @@
                     roomOptionsDropdown.style.display = 'none';
                     changeLogoBox.style.display = 'none';
                     addUsersBox.style.display = 'none';
+                    userOptions.style.display = 'none';
+                    userNick.style.display = 'block';
+                    userAvatar.style.display = 'block';
                 }
             })
+
+            const userOptions = document.querySelector(".user-dropdown");
+            function showUserOptions(){
+                var style = window.getComputedStyle(userOptions);
+                var display = style.getPropertyValue('display');
+                if(display === 'none'){
+                    userOptions.style.display = 'block';
+                }else {
+                    userOptions.style.display = 'none';
+                }
+            }
+
+            const userNick = document.querySelector(".change-user-name-box")
+            function changeUserNickname(){
+                var style = window.getComputedStyle(userNick);
+                var display = style.getPropertyValue('display');
+                if(display === 'none')
+                    userNick.style.display = 'block';
+            }
+
+            const userAvatar = document.querySelector(".change-user-avatar-box")
+            function changeUserAvatar(){
+                var style = window.getComputedStyle(userAvatar);
+                var display = style.getPropertyValue('display');
+                if(display === 'none')
+                    userAvatar.style.display = 'block';
+            }
+
 
             function cancel(){
                 addChannelBox.style.display = 'none';

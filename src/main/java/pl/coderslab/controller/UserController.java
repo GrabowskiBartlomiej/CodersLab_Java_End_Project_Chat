@@ -2,9 +2,7 @@ package pl.coderslab.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.User;
 import pl.coderslab.services.UserService;
 
@@ -68,5 +66,17 @@ public class UserController {
         return ("home");
     }
 
+
+    @PostMapping("/changeUserName/{rId}/{cId}")
+    public String changeUserName(HttpServletRequest req, @RequestParam String name, @PathVariable long rId, @PathVariable long cId) {
+        userService.changeUsername(name, req);
+        return "redirect:/chat/" + rId + "/" + cId;
+    }
+
+    @PostMapping("/changeUserAvatar/{rId}/{cId}")
+    public String changeUserAvatar(HttpServletRequest req, @RequestParam String link, @PathVariable long rId, @PathVariable long cId) {
+        userService.changeUserAvatar(link, req);
+        return "redirect:/chat/" + rId + "/" + cId;
+    }
 
 }

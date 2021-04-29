@@ -754,3 +754,130 @@ input[type="button"]:hover{
     width: 40%;
     float: right;
 }
+
+.chat_user{
+    position: relative;
+}
+
+.user_options{
+    text-decoration: none;
+    color:white;
+    margin-top: 15px;
+    padding: 15px 35px 15px;
+    display:flex;
+}
+
+.chat_user span{
+    font-size: 30px;
+}
+
+.chat_user a:hover{
+    background: #393939;
+}
+
+.user-dropdown{
+    display: none;
+    position: absolute;
+
+    background-color: #191919;
+    min-width: 220px;
+    min-height: 150px;
+    box-shadow: 0 0 4px 3px rgba(0,0,0,0.1);
+    z-index: 3000;
+    margin-top: -220px;
+    margin-left: 8px;
+    border-radius: 15px;
+    transition: 0.8s;
+}
+
+.user-dropdown a{
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #898989;
+    padding: 15px;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.change-user-name-box{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    padding: 40px;
+    background: rgba(0,0,0,.8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+    border-radius: 15px;
+}
+
+.change-user-name-box h2{
+    color: #fff;
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+.change-user-name-box .input-channel-name input{
+    border:none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+}
+
+.change-user-name-box .input-channel-name label{
+    position: absolute;
+    color: #fff;
+    top: 30%;
+    left: 10%;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.change-user-name-box input[type="submit"]{
+    background: palegreen;
+    width: 40%;
+    float: right;
+}
+
+.change-user-avatar-box{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    padding: 40px;
+    background: rgba(0,0,0,.8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+    border-radius: 15px;
+}
+
+.change-user-avatar-box h2{
+    color: #fff;
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+.change-user-avatar-box .input-channel-name input{
+    border:none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+}
+
+.change-user-avatar-box .input-channel-name label{
+    position: absolute;
+    color: #fff;
+    top: 30%;
+    left: 10%;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.change-user-avatar-box input[type="submit"]{
+    background: palegreen;
+    width: 40%;
+    float: right;
+}

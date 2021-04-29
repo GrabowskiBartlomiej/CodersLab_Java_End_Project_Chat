@@ -75,4 +75,16 @@ public class UserService {
             userDao.update(user);
         }
     }
+
+    public void changeUsername(String name, HttpServletRequest req) {
+        User user = (User) req.getSession().getAttribute("user");
+        user.setUsername(name);
+        userDao.update(user);
+    }
+
+    public void changeUserAvatar(String link, HttpServletRequest req) {
+        User user = (User) req.getSession().getAttribute("user");
+        user.setAvatar(link);
+        userDao.update(user);
+    }
 }
