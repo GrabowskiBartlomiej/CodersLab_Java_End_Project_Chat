@@ -37,8 +37,8 @@
                 <a href="#" class="channel_options">V</a>
 
                 <div class="about-dropdown-channel">
-                    <a href="#">Edit channel</a>
-                    <a href="#">Delete channel</a>
+                    <a href="#" onclick="renameChannel()">Rename channel</a>
+                    <a href="#" onclick="deleteChannel()">Delete channel</a>
                 </div>
 
 
@@ -212,6 +212,25 @@
             </form>
         </div>
 
+        <div class = "rename-channel-box" style="display: none">
+            <h2>Rename channel</h2>
+            <form method="post" action="/renameChannel/${roomId}/${channelId}">
+                <div class="input-channel-name">
+                    <input type="text" name="name" required="">
+                    <label>New Name</label>
+                </div>
+                <input type="button" name="" value="cancel" onclick="cancel()">
+                <input type="submit" name="" value="submit">
+            </form>
+        </div>
+
+        <div class = "delete-channel-box" style="display: none">
+            <h2>Delete this channel?</h2>
+            <form method="post" action="/deleteChannel/${roomId}/${channelId}">
+                <input type="button" name="" value="cancel" onclick="cancel()">
+                <input type="submit" name="" value="confirm">
+            </form>
+        </div>
 
         <script>
 
@@ -368,8 +387,10 @@
                     changeLogoBox.style.display = 'none';
                     addUsersBox.style.display = 'none';
                     userOptions.style.display = 'none';
-                    userNick.style.display = 'block';
-                    userAvatar.style.display = 'block';
+                    userNick.style.display = 'none';
+                    userAvatar.style.display = 'none';
+                    nameChannel.style.display = 'none';
+                    deleteChannelBox.style.display = 'none';
                 }
             })
 
@@ -400,11 +421,32 @@
                     userAvatar.style.display = 'block';
             }
 
+            const nameChannel = document.querySelector(".rename-channel-box")
+            function renameChannel(){
+                var style = window.getComputedStyle(nameChannel);
+                var display = style.getPropertyValue('display');
+                if(display === 'none')
+                    nameChannel.style.display = 'block';
+            }
+
+            const deleteChannelBox = document.querySelector(".delete-channel-box")
+            function deleteChannel(){
+                var style = window.getComputedStyle(deleteChannelBox);
+                var display = style.getPropertyValue('display');
+                if(display === 'none')
+                    deleteChannelBox.style.display = 'block';
+            }
 
             function cancel(){
                 addChannelBox.style.display = 'none';
+                roomOptionsDropdown.style.display = 'none';
                 changeLogoBox.style.display = 'none';
                 addUsersBox.style.display = 'none';
+                userOptions.style.display = 'none';
+                userNick.style.display = 'none';
+                userAvatar.style.display = 'none';
+                nameChannel.style.display = 'none';
+                deleteChannelBox.style.display = 'none';
             }
         </script>
     </body>

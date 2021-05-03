@@ -29,6 +29,7 @@ public class Room {
         this.name = name;
     }
 
+    @OneToMany(cascade = CascadeType.ALL)
     public List<Channel> getChannels() {
         return channels;
     }

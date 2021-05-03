@@ -216,4 +216,28 @@ public class ChatService {
         user.setRooms(unique);
         userDao.update(user);
     }
+
+
+    public void renameChannel(String name, long chId) {
+        Channel ch = channelDao.findById(chId);
+        ch.setName(name);
+        channelDao.update(ch);
+    }
+
+    public void deleteChannel(long rId, long chId) {
+        Room room = roomDao.findById(rId);
+        List<Channel> channels = room.getChannels();
+
+        for(Iterator<Channel> it = channels.iterator(); it.hasNext();){
+            Channel nextCh = it.next();
+            if(nextCh.getId() == chId){
+                it.remove();
+                channels.remove(nextCh);
+                channels = channels.stream().distinct().collect(Collectors.toList());
+                room.setChannels(channels);
+                roomDao.update(room);
+                channelDao.delete(nextCh);
+            }
+        }
+    }
 }

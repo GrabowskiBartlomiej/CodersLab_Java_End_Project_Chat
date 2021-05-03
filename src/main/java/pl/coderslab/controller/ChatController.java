@@ -67,4 +67,16 @@ public class ChatController {
         chatService.leaveRoom(rId, req);
         return "redirect:/chat/1/1";
     }
+
+    @PostMapping("/renameChannel/{rId}/{chId}")
+    public String renameChannel(@RequestParam String name, @PathVariable long rId, @PathVariable long chId) {
+        chatService.renameChannel(name, chId);
+        return "redirect:/chat/" + rId + "/" + chId;
+    }
+
+    @PostMapping("/deleteChannel/{rId}/{chId}")
+    public String deleteChannel(@PathVariable long rId, @PathVariable long chId) {
+        chatService.deleteChannel(rId, chId);
+        return "redirect:/chat/" + rId;
+    }
 }

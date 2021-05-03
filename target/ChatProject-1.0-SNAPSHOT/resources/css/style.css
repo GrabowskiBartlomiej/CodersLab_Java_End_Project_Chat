@@ -881,3 +881,85 @@ input[type="button"]:hover{
     width: 40%;
     float: right;
 }
+
+.rename-channel-box{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    padding: 40px;
+    background: rgba(0,0,0,.8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+    border-radius: 15px;
+}
+
+.rename-channel-box h2{
+    color: #fff;
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+.rename-channel-box .input-channel-name input{
+    border:none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+}
+
+.rename-channel-box .input-channel-name label{
+    position: absolute;
+    color: #fff;
+    top: 30%;
+    left: 10%;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.rename-channel-box input[type="submit"]{
+    background: palegreen;
+    width: 40%;
+    float: right;
+}
+
+.delete-channel-box{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    padding: 40px;
+    background: rgba(0,0,0,.8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+    border-radius: 15px;
+}
+
+.delete-channel-box h2{
+    color: #fff;
+    margin: 0 0 30px;
+    text-align: center;
+}
+
+.delete-channel-box .input-channel-name input{
+    border:none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+}
+
+.delete-channel-box .input-channel-name label{
+    position: absolute;
+    color: #fff;
+    top: 30%;
+    left: 10%;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.delete-channel-box input[type="submit"]{
+    background: palegreen;
+    width: 40%;
+    float: right;
+}
