@@ -236,7 +236,12 @@ public class ChatService {
                 channels = channels.stream().distinct().collect(Collectors.toList());
                 room.setChannels(channels);
                 roomDao.update(room);
+                List<Message> messages = messageRepository.findAllByChannelId(chId);
+                for(Message message : messages){
+                    messageDao.delete(message);
+                }
                 channelDao.delete(nextCh);
+
             }
         }
     }
