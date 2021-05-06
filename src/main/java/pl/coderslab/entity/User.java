@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "clients")
 public class User {
 
     @Id
@@ -14,10 +14,13 @@ public class User {
     private String email;
     private String username;
     private String password;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Room> rooms;
-    @Column(columnDefinition = "COLUMN_TYPE default '0'")
-    private long status;
+
+
+    private long status = 0;
+
     private String avatar = "https://www.hubitools.com/assets/36cb0984-e7f7-4b98-97e7-abbbd6fa3fc0/260x200/new.png";
 
     public String getAvatar() {

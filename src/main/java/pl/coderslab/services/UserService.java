@@ -1,8 +1,10 @@
 package pl.coderslab.services;
 
 import org.springframework.stereotype.Service;
+import pl.coderslab.dao.ChannelDao;
 import pl.coderslab.dao.RoomDao;
 import pl.coderslab.dao.UserDao;
+import pl.coderslab.entity.Channel;
 import pl.coderslab.entity.Room;
 import pl.coderslab.entity.User;
 import pl.coderslab.entity.UsersStatus;
@@ -16,19 +18,21 @@ public class UserService {
 
     private final UserDao userDao;
     private final RoomDao roomDao;
+    private final ChannelDao channelDao;
 
-    public UserService(UserDao userDao, RoomDao roomDao) {
+    public UserService(UserDao userDao, RoomDao roomDao, ChannelDao channelDao) {
         this.userDao = userDao;
         this.roomDao = roomDao;
+        this.channelDao = channelDao;
     }
 
 
-    public User loginAttempt(String email, String password){
+    public User loginAttempt(String email, String password) {
         return userDao.login(email, password);
 
     }
 
-    public void loginAndSetSession(User user, HttpServletRequest req){
+    public void loginAndSetSession(User user, HttpServletRequest req) {
         user.setStatus(3);
         userDao.update(user);
 
@@ -42,11 +46,11 @@ public class UserService {
     }
 
 
-    public boolean checkPasswords(String password, String repeatedPassword){
+    public boolean checkPasswords(String password, String repeatedPassword) {
         return repeatedPassword.equals(password);
     }
 
-    public void successRegistration(String password, String email, String username, HttpServletRequest req){
+    public void successRegistration(String password, String email, String username, HttpServletRequest req) {
         password = userDao.hashPassword(password);
         System.out.println(password);
         User user = new User();
@@ -61,16 +65,16 @@ public class UserService {
         req.getSession().setAttribute("username", username);
     }
 
-    public void logout(HttpServletRequest req){
+    public void logout(HttpServletRequest req) {
         User user = (User) req.getSession().getAttribute("user");
         user.setStatus(0);
         userDao.update(user);
         req.getSession().removeAttribute("user");
     }
 
-    public void logoutAll(){
+    public void logoutAll() {
         List<User> allUsers = userDao.findAll();
-        for(User user : allUsers){
+        for (User user : allUsers) {
             user.setStatus(0);
             userDao.update(user);
         }
@@ -86,5 +90,24 @@ public class UserService {
         User user = (User) req.getSession().getAttribute("user");
         user.setAvatar(link);
         userDao.update(user);
+    }
+
+
+    public void checkLobby() {
+        Room room = roomDao.findById(1);
+        if (room == null) {
+            Channel general = new Channel();
+            general.setName("General");
+            general.setType("text");
+            channelDao.addChannel(general);
+
+            Room lobby = new Room();
+            lobby.setName("Lobby");
+            lobby.setLogo("http://www.clker.com/cliparts/1/5/2/4/1194989106466481769aiga_elevator1.svg");
+            List<Channel> channels = new ArrayList<>();
+            channels.add(general);
+            lobby.setChannels(channels);
+            roomDao.addRoom(lobby);
+        }
     }
 }

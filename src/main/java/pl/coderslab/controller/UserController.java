@@ -18,6 +18,7 @@ public class UserController {
 
     @RequestMapping("/")
     public String HomePage() {
+        userService.checkLobby();
         return "home";
     }
 

@@ -16,7 +16,6 @@ public class Room {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Channel> channels;
 
-
     public long getId() {
         return id;
     }

@@ -44,11 +44,11 @@
 
             </div>
 
-            <div class="chat_room_list">
+            <div class="chat_room_list">s
                 <table>
                     <tbody>
                         <c:forEach items="${rooms}" var="room">
-                                <tr><td><a href="/chat/${room.getId()}"><img style="width: 100%; border-radius: 40px;height: 100%" src="${room.getLogo()}"/></a>
+                                <tr><td><a href="/chat/${room.getId()}"><img class="immagine" src="${room.getLogo()}"/></a>
                                     <p class="get-name">${room.getName()}</p>
                                 </td></tr>
                         </c:forEach>
@@ -391,6 +391,7 @@
                     userAvatar.style.display = 'none';
                     nameChannel.style.display = 'none';
                     deleteChannelBox.style.display = 'none';
+                    channelOptionsDropdown.style.display = 'none';
                 }
             })
 
