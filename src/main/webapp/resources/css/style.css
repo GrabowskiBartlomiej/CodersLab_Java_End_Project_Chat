@@ -428,7 +428,7 @@ input[type="submit"]:hover{
 
 
 td{
-    padding: 15px;
+    padding: 5px 15px 0px;
 }
 
 .data:hover{
