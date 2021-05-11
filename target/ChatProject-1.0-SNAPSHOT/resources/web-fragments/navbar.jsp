@@ -15,8 +15,8 @@
             </c:choose>
         </li>
 
-        <li><a href="#">About</a></li>
-        <li><a href="#">Support</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/support">Support</a></li>
         <li id="login">
             <c:choose>
                 <c:when test="${user==null}">

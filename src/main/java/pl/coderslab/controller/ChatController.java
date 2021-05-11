@@ -79,4 +79,14 @@ public class ChatController {
         chatService.deleteChannel(rId, chId);
         return "redirect:/chat/" + rId;
     }
+
+    @RequestMapping("/about")
+    public String about(){
+        return "about";
+    }
+
+    @RequestMapping("/support")
+    public String support(){
+        return "support";
+    }
 }
