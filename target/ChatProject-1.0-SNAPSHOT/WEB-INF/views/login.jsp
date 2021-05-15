@@ -12,8 +12,8 @@
 
     <div class="center">
         <div class="container">
-            <h1 id="title">Welcome back!</h1>
-            <p id="description">We are happy you decided to come back!</p>
+            <h1 id="title">Welcome</h1>
+            <p id="description">Log into our service.</p>
 
             <form class="form" id="form" method="post" action="/login">
                 <input type="email" class="email" name="email" placeholder="Email" required>

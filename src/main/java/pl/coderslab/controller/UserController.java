@@ -32,13 +32,10 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String logged(@RequestParam String email, @RequestParam String password, HttpServletRequest req) {
         User user = userService.loginAttempt(email, password);
-
         if (user == null) {
             return "login";
         } else {
             userService.loginAndSetSession(user, req);
-
-
             return "redirect:/chat/1/1";
         }
     }
@@ -54,7 +51,7 @@ public class UserController {
     public String registerPost(@RequestParam String username, @RequestParam String email, @RequestParam String password, @RequestParam String re_password, HttpServletRequest req) {
         if (userService.checkPasswords(password, re_password)) {
             userService.successRegistration(password, email, username, req);
-            return "successRegister";
+            return "login";
         } else {
             return "register";
         }

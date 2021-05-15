@@ -1002,3 +1002,12 @@ input[type="button"]:hover{
     text-align: center;
     margin-bottom: 10%;
 }
+
+#chat_row a{
+    color:royalblue;
+    text-decoration: none;
+}
+
+#chat_row a:hover{
+    text-decoration: underline;
+}

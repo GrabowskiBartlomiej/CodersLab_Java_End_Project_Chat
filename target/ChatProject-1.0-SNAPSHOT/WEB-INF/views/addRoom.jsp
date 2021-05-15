@@ -9,8 +9,8 @@
 <div class="wrapper">
     <div class="center">
         <div class="container">
-            <h1 id="title">Welcome back!</h1>
-            <p id="description">We are happy you decided to come back!</p>
+            <h1 id="title">Add the new room</h1>
+            <p id="description">If you don't paste any direct link to the image the default one will be set.</p>
 
             <form class="form" id="form" method="post" action="/chat/addRoom">
                 <input type="text" name="roomName" placeholder="Insert rooms name" required>

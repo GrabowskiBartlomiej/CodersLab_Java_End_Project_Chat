@@ -52,7 +52,6 @@ public class UserService {
 
     public void successRegistration(String password, String email, String username, HttpServletRequest req) {
         password = userDao.hashPassword(password);
-        System.out.println(password);
         User user = new User();
         user.setPassword(password);
         user.setEmail(email);
