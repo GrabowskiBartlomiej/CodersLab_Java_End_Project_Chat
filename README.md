@@ -12,9 +12,9 @@ This is a service that allows user to register/login to the REAL-TIME CHAT INTER
 
 From there user can create a new room or inside the room can create multiple channels where multiple users can chat.
 Possibility to:
-*set room's logo,
-*set users' avatar,
-*see users on and offline,
-*change username,
-*change channel and room name,
-*delete/add channels and/or rooms.
+* set room's logo,
+* set users' avatar,
+* see users on and offline,
+* change username,
+* change channel and room name,
+* delete/add channels and/or rooms.
