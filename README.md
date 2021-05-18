@@ -8,10 +8,13 @@ Project that is a proof of basic knowledge of the following tools used:
 -HTML/CSS
 -JavaScript
 
-This is a service that allows user to register/login to the REAL-TIME CHAT INTERFACE landing in lobby channel where any user have access.
+This is a service that allows user to register/login to the REAL-TIME CHAT INTERFACE landing in lobby channel where any user have access
 
-From there user can create a new room inside the room he can create multiple channels where multiple users can chat.
+From there user can create a new room or inside the room can create multiple channels where multiple users can chat.
 Possibility to:
 -set room's logo,
 -set users' avatar,
--see users on and offline.
+-see users on and offline,
+-change username,
+-change channel and room name,
+-delete/add channels and/or rooms.
