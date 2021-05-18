@@ -18,4 +18,5 @@ Possibility to:
 * see users on and offline,
 * change username,
 * change channel and room name,
-* delete/add channels and/or rooms.
+* delete/add channels and/or rooms,
+* chat in real time.
