@@ -13,6 +13,9 @@ This is a service that allows user to register/login to the REAL-TIME CHAT INTER
 From there user can create a new room or inside the room can create multiple channels where multiple users can chat.
 
 Possibility to:
+* register,
+* login,
+* invite other people to your room,
 * set room's logo,
 * set users' avatar,
 * see users on and offline,
